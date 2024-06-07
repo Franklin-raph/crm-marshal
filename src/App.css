@@ -1,0 +1,12 @@
+*{
+    font-family: 'Poppins';
+}
+
+.image-container:hover img{
+    scale: 1.2;
+    transition: 0.9s;
+}
+
+.image-container img{
+    transition: 0.9s;
+}
