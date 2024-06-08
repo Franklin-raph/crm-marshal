@@ -6,7 +6,7 @@ const Home = () => {
     const navigate = useNavigate()
 
   return (
-    <div className='bg-[#F3F4F6]'>
+    <div className='max-w-[1400px] mx-auto'>
         <nav className='flex items-center justify-between px-[5rem] py-4 shadow-sm'>
             <Link to='/' className='flex items-center gap-3'>
                 <img src="./images/brand-header.png" className='w-[35px]' alt="" />
@@ -20,7 +20,7 @@ const Home = () => {
                 <p className='mb-6 text-[18px] text-gray-700'>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ullam eum blanditiis earum voluptates natus, id reiciendis distinctio quos vel error.</p>
                 <div className='flex items-center gap-[1rem]'>
                     <button onClick={() => navigate('/login')} className='bg-[#2B91F3] py-[0.8rem] text-white rounded-full w-[30%] px-[2rem] hover:shadow-lg'>Login</button>
-                    <button className='border-2 border-[#2B91F3] py-[0.8rem] text-[#2B91F3] hover:shadow-lg rounded-full w-[30%] px-[2rem]'>Register</button>
+                    <button onClick={() => navigate('/register')} className='border-2 border-[#2B91F3] py-[0.8rem] text-[#2B91F3] hover:shadow-lg rounded-full w-[30%] px-[2rem]'>Register</button>
                 </div>
             </div>
             <div className='w-[45%] mr-[5rem] relative mb-[8rem]'>
