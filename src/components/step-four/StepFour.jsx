@@ -19,6 +19,7 @@ const StepFour = ({nextStep, prevStep}) => {
 
     const aboutUs = ['Email', 'Linkedin', 'Advert', 'Other']
     const positions = ['Program Management', 'Cyber Security', 'Human Resources', 'Social Media', 'Trainer', 'Tech Support', 'Information Technology']
+    const volunteerHours = ['Monday Hours','Tuesday Hours','Wednesday Hours','Monday Hours','Monday Hours']
 
   return (
     <div class="min-h-screen bg-gray-100 text-gray-900 flex justify-center">
@@ -82,6 +83,26 @@ const StepFour = ({nextStep, prevStep}) => {
                                         placeholder="What experience do you have in this area?"
                                     />
                                 </div>
+                            </div>
+                            <div className='flex items-center gap-3 border-b border-gray-200 p-1 relative mt-[2.5rem]'>
+                                <input
+                                    class="w-full font-medium placeholder-gray-500 text-md outline-none"
+                                    type="text"
+                                    placeholder="What is your availability to volunteer?"
+                                />
+                                <IoChevronDown className='text-[24px] text-gray-500 cursor-pointer' onClick={() => setHearUsDropDown(!hearUsDropDown)}/>
+                                {
+                                    hearUsDropDown &&
+                                    <div className='bg-white w-full absolute top-[45px] rounded-[4px] left-0 border'>
+                                        {
+                                            aboutUs.map(about => (
+                                                <p className='text-[14px] text-gray-500 hover:bg-gray-300 cursor-pointer p-[5px]' onClick={() => {
+                                                    setHearUsDropDown(!hearUsDropDown)
+                                                }}>{about}</p>
+                                            ))
+                                        }
+                                    </div>
+                                }
                             </div>
                             <div className='flex items-center gap-5 mt-[2.5rem] w-full'>
                                 <div className='flex items-center gap-3 border-b border-gray-200 p-1 w-full'>
