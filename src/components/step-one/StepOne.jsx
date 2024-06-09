@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { GoShieldCheck } from "react-icons/go";
 import { LuUser2 } from "react-icons/lu";
@@ -21,8 +21,20 @@ const StepOne = ({nextStep, prevStep}) => {
     const [passwordType, setPasswordType] = useState('password')
     const [hearUsDropDown, setHearUsDropDown] = useState(false)
     const [countryDropDown, setCountryDropDown] = useState(false)
+    const [allCountries, setAllCountries] = useState([])
 
-    const aboutUs = ['Email', 'Linkedin', 'Advert', 'Other']
+
+    async function getAllCountruies(){
+        const response = await fetch('https://restcountries.com/v3.1/all')
+        const data = await response.json()
+        console.log(data)
+        setAllCountries(data)
+        return data
+    }
+
+    useEffect(() => {
+        getAllCountruies()
+    },[])
 
   return (
     <div class="min-h-screen bg-gray-100 text-gray-900 flex justify-center">
@@ -94,13 +106,28 @@ const StepOne = ({nextStep, prevStep}) => {
                                 </div>
                                 <p className='mb-6 underline mt-[4.5rem] text-gray-500 font-[600] text-lg'>Residential Information</p>
                                 <div className='flex items-center gap-5'>
-                                    <div className='flex items-center gap-3 border-b border-gray-200 p-1'>
-                                        <FiFlag className='text-[24px] text-gray-500'/>
-                                        <input
-                                            class="w-full font-medium placeholder-gray-500 text-md outline-none"
-                                            type="text"
-                                            placeholder="Country"
-                                        />
+                                    <div className='flex items-center gap-3 border-b border-gray-200 p-1 relative'>
+                                        <div className='flex items-center gap-3'>
+                                            <FiFlag className='text-[24px] text-gray-500'/>
+                                            <input
+                                                class="w-full font-medium placeholder-gray-500 text-md outline-none"
+                                                type="text"
+                                                placeholder="Country"
+                                            />
+                                        </div>
+                                        <IoChevronDown className='text-[24px] text-gray-500 cursor-pointer' onClick={() => setCountryDropDown(!countryDropDown)}/>
+                                        {
+                                            countryDropDown &&
+                                            <div className='bg-white w-full absolute top-[45px] rounded-[4px] left-0 border'>
+                                                {
+                                                    allCountries.map(country => (
+                                                        <p className='text-[14px] text-gray-500 hover:bg-gray-300 cursor-pointer p-[5px]' onClick={() => {
+                                                            setCountryDropDown(!countryDropDown)
+                                                        }}>{country}</p>
+                                                    ))
+                                                }
+                                            </div>
+                                        }
                                     </div>
                                     <div className='flex items-center gap-3 border-b border-gray-200 p-1'>
                                         <FiFlag className='text-[24px] text-gray-500'/>
