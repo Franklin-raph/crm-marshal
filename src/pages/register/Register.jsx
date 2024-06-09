@@ -4,115 +4,44 @@ import { GoShieldCheck } from "react-icons/go";
 import { LuUser2 } from "react-icons/lu";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa6";
 import { AiFillHome } from 'react-icons/ai';
+import StepOne from '../../components/step-one/StepOne'
+import StepTwo from '../../components/step-two/StepTwo'
+import StepThree from '../../components/step-three/StepThree'
+import StepFour from '../../components/step-four/StepFour';
 
 const Register = () => {
 
-  const navigate = useNavigate()
-  const [passwordType, setPasswordType] = useState('password')
+    const [formStep, setFormStep] = useState(1)
 
-  return (
-    <div class="min-h-screen bg-gray-100 text-gray-900 flex justify-center">
-        <div
-        class="max-w-screen-xl m-0 sm:m-20 bg-white shadow sm:rounded-lg flex justify-center flex-1"
-        >
-            <div class="lg:w-1/2 xl:w-5/12 p-6 sm:p-12">
-                <div>
-                    <AiFillHome onClick={()=> navigate("/")} class="text-3xl border border-gray-300 text-gray-300 rounded-full p-1 hover:bg-gray-300 transition-all cursor-pointer hover:text-white"/>
-                    <img src="./images/brand-header.png" className='w-[120px] mx-auto' alt="" />
-                </div>
-                    <form class="mt-6 flex flex-col items-center">
-                        <h1 class="text-xl xl:text-2xl font-[700] text-gray-700">
-                            Sign up for an account
-                        </h1>
-                        <div className='flex items-center gap-5 text-gray-500 font-[500] mt-6'>
-                          <button className='text-[#2B91F3] underline'>Register as a Volunteer</button>
-                          <button onClick={() => navigate('/register-alumni')}>Register as an Alumni</button>
-                        </div>
-                        <div class="w-full flex-1 mt-8">
-                            <div class="mx-auto max-w-xs">
-                                <div className='flex items-center gap-3 border-b border-gray-200 p-1 mt-4'>
-                                    <LuUser2 className='text-[24px] text-gray-500'/>
-                                    <input
-                                        class="w-full font-medium placeholder-gray-500 text-md outline-none"
-                                        type="text"
-                                        placeholder="Username"
-                                    />
-                                </div>
-                                <div className='flex items-center gap-3 border-b border-gray-200 p-1 mt-[2rem]'>
-                                    <LuUser2 className='text-[24px] text-gray-500'/>
-                                    <input
-                                        class="w-full font-medium placeholder-gray-500 text-md outline-none"
-                                        type="text"
-                                        placeholder="Email"
-                                    />
-                                </div>
-                                <div className='flex items-center gap-3 border-b border-gray-200 p-1 mt-[2rem]'>
-                                    <GoShieldCheck className='text-[24px] text-gray-500'/>
-                                    <div className='flex items-center justify-between'>
-                                        <input
-                                            class="w-full font-medium placeholder-gray-500 text-md outline-none"
-                                            type={passwordType}
-                                            placeholder="Password"
-                                        />
-                                        {
-                                            passwordType === 'password' &&
-                                                <FaRegEye onClick={() => setPasswordType('text')} className='cursor-pointer'/>
-                                        }
-                                        {
-                                            passwordType === 'text' &&
-                                                <FaRegEyeSlash onClick={() => setPasswordType('password')} className='cursor-pointer'/>
-                                        }
-                                    </div>
-                                </div>
-                                <div className='flex items-center gap-3 border-b border-gray-200 p-1 mt-[2rem]'>
-                                    <GoShieldCheck className='text-[24px] text-gray-500'/>
-                                    <div className='flex items-center justify-between'>
-                                        <input
-                                            class="w-full font-medium placeholder-gray-500 text-md outline-none"
-                                            type={passwordType}
-                                            placeholder="Confirm Password"
-                                        />
-                                        {
-                                            passwordType === 'password' &&
-                                                <FaRegEye onClick={() => setPasswordType('text')} className='cursor-pointer'/>
-                                        }
-                                        {
-                                            passwordType === 'text' &&
-                                                <FaRegEyeSlash onClick={() => setPasswordType('password')} className='cursor-pointer'/>
-                                        }
-                                    </div>
-                                </div>
-                                <button
-                                    type='submit'
-                                    class="mt-5 tracking-wide font-semibold bg-[#2B91F3] text-gray-100 w-full py-4 rounded-lg hover:bg-[#2b82f3] transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none"
-                                >
-                                    <span class="ml-3">Next</span>
-                                </button>
-                                <p className='text-center text-[15px] text-gray-600 mt-5'>
-                                    Already have an account, <span className='text-[#2B91F3] cursor-pointer' onClick={() => navigate('/login')}>Sign in</span>
-                                </p>
-                                <p class="mt-6 text-xs text-gray-600 text-center">
-                                    I agree to the <span className='cursor-pointer text-[#2B91F3]'>terms and conditions</span>
-                                </p>
-                            </div>
-                        </div>
-                    </form>
-            </div>
-            <div class="flex-1 bg-indigo-100 text-start hidden lg:flex relative">
-                <img src="./images/brand-header.png" className='w-[60%] object-contain mx-auto' alt="" />
-                <div className='absolute bg-[#2b92f3c7] w-full h-full flex items-center justify-start text-white'>
-                    <div className='pl-[60px] md:pl-[75px]'>
-                        <p className='tracking-[5px]'>WELCOME TO</p>
-                        <p className='font-[600] tracking-[8px] text-[40px] drop-shadow-xl'>CRMMARSHAL</p>
-                        <div className='h-[1px] mt-[13px] mb-4 w-[60%] bg-white'></div>
-                        <p>Sign Up For an Account Today</p>
-                    </div>
-                </div>
-                {/* <img src="https://storage.googleapis.com/devitary-image-host.appspot.com/15848031292911696601-undraw_designer_life_w96d.svg" alt="" /> */}
-            </div>
-        </div>
-    </div>
-  )
+      // Proceed to the next step
+      function nextStep() {
+        setFormStep(formStep + 1)
+        console.log(formStep);
+    }
+
+    // Return to previous step
+    function prevStep() {
+        setFormStep(formStep - 1)
+    }
+
+    switch (formStep) {
+        case 1:
+            return (
+                <StepOne nextStep={nextStep} prevStep={prevStep} />
+            )
+        case 2:
+            return (
+                <StepTwo nextStep={nextStep} prevStep={prevStep}/>
+            )
+        case 3:
+            return (
+                <StepThree nextStep={nextStep} prevStep={prevStep}/>
+            )
+        case 4:
+            return (
+                <StepFour nextStep={nextStep} prevStep={prevStep}/>
+            )
+    }
 }
 
 export default Register
