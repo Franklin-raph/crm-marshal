@@ -1,23 +1,30 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { GoShieldCheck } from "react-icons/go";
 import { LuUser2 } from "react-icons/lu";
-import { FaRegEye, FaRegEyeSlash } from "react-icons/fa6";
 import { AiFillHome } from 'react-icons/ai';
-import { FiFlag, FiHome, FiMail , FiPhone} from "react-icons/fi";
-import { PiCity } from "react-icons/pi";
-import { FaRegAddressBook } from "react-icons/fa";
-import { IoChevronDown } from "react-icons/io5";
-import { BsCalendarCheck } from "react-icons/bs";
+import { FiPhone} from "react-icons/fi";
+import Alert from '../alert/Alert';
 
-const StepThree = ({nextStep, prevStep}) => {
+const StepThree = ({nextStep, prevStep, userData, setEmergencyContact, setRelationToContact, setContactPhone, setConvicted, setReasonForConviction}) => {
 
     const navigate = useNavigate()
-    const [passwordType, setPasswordType] = useState('password')
-    const [hearUsDropDown, setHearUsDropDown] = useState(false)
-    const [countryDropDown, setCountryDropDown] = useState(false)
 
-    const aboutUs = ['Email', 'Linkedin', 'Advert', 'Other']
+    const convicteArray = ['Yes', 'No']
+
+    const [msg, setMsg] = useState('')
+    const [alertType, setAlertType] = useState()
+
+    function validateFormAndMoveToNextStep(){
+        console.log(userData);
+        if(!userData.emergencyContact || !userData.relationToContact || !userData.contactPhone || !userData.convicted
+            ){
+                setMsg("Please Fill in all fields");
+                setAlertType('error');
+                return;
+            }else{
+            nextStep()
+        }
+    }
 
   return (
     <div class="min-h-screen bg-gray-100 text-gray-900 flex justify-center">
@@ -29,7 +36,7 @@ const StepThree = ({nextStep, prevStep}) => {
                     <AiFillHome onClick={()=> navigate("/")} class="text-3xl border border-gray-300 text-gray-300 rounded-full p-1 hover:bg-gray-300 transition-all cursor-pointer hover:text-white"/>
                     <img src="./images/brand-header.png" className='w-[120px] mx-auto' alt="" />
                 </div>
-                <form class="mt-6 flex flex-col items-center">
+                <div class="mt-6 flex flex-col items-center">
                   <h1 class="text-xl xl:text-2xl font-[700] text-gray-700">
                       Sign up for an account
                   </h1>
@@ -69,6 +76,8 @@ const StepThree = ({nextStep, prevStep}) => {
                                       class="w-full font-medium placeholder-gray-500 text-md outline-none"
                                       type="text"
                                       placeholder="Emergency Contact"
+                                      onChange={e => setEmergencyContact(e.target.value)}
+                                      value={userData.emergencyContact}
                                   />
                               </div>
                           </div>
@@ -79,6 +88,8 @@ const StepThree = ({nextStep, prevStep}) => {
                                       class="w-full font-medium placeholder-gray-500 text-md outline-none"
                                       type="text"
                                       placeholder="Relation to Contact"
+                                      onChange={e => setRelationToContact(e.target.value)}
+                                      value={userData.relationToContact}
                                   />
                               </div>
                           </div>
@@ -89,6 +100,8 @@ const StepThree = ({nextStep, prevStep}) => {
                                       class="w-full font-medium placeholder-gray-500 text-md outline-none"
                                       type="text"
                                       placeholder="Contact Phone"
+                                      onChange={e => setContactPhone(e.target.value)}
+                                      value={userData.contactPhone}
                                   />
                               </div>
                           </div>
@@ -96,20 +109,22 @@ const StepThree = ({nextStep, prevStep}) => {
                           <div className='mt-3'>
                             <p className='text-gray-500 mb-3'>Have you been convicted of a felony or a misdemeanor?</p>
                             <div className='flex items-center justify-between w-[50%]'>
-                              <div className='flex items-center gap-1 text-gray-500'>
-                                <label htmlFor="convict">Yes</label>
-                                <input type="radio" name="convict" />
-                              </div>
-                              <div className='flex items-center gap-1 text-gray-500'>
-                                <label htmlFor="convict">No</label>
-                                <input type="radio" name="convict" />
-                              </div>
+                                {
+                                    convicteArray.map(convict => (
+                                        <div className='flex items-center gap-1 text-gray-500'>
+                                            <label htmlFor="convict">{convict}</label>
+                                            <input type="radio" name="convict" value={userData.convicted} onChange={() => setConvicted(convict)} />
+                                        </div>
+                                    ))
+                                }
                             </div>
                           </div>
-                          <div className='flex items-center gap-5 mt-[2.5rem] w-full'>
-                                  <textarea className='w-full border-gray-200 border rounded-[6px] p-4 outline-none resize-none' placeholder='Describe the conviction. Include the type of crime, date, city, country, state where the crime took place' cols="10" rows="5"></textarea>
-                          </div>
-                          
+                          {
+                            userData.convicted === 'Yes' &&
+                            <div className='flex items-center gap-5 mt-[2.5rem] w-full'>
+                                <textarea onChange={e => setReasonForConviction(e.target.value)} value={userData.reasonForConviction} className='w-full border-gray-200 border rounded-[6px] p-4 outline-none resize-none' placeholder='Describe the conviction. Include the type of crime, date, city, country, state where the crime took place' cols="10" rows="5"></textarea>
+                            </div>
+                          }
                           
                           <div className='flex items-center gap-[3rem]'>
                               <button
@@ -119,7 +134,7 @@ const StepThree = ({nextStep, prevStep}) => {
                                   <span class="ml-3">Previous</span>
                               </button>
                               <button
-                                  onClick={() => nextStep()}
+                                  onClick={validateFormAndMoveToNextStep}
                                   class="mt-10 tracking-wide font-semibold bg-[#2B91F3] text-gray-100 w-full py-4 rounded-lg hover:bg-[#2b82f3] transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none"
                               >
                                   <span class="ml-3">Next</span>
@@ -133,7 +148,7 @@ const StepThree = ({nextStep, prevStep}) => {
                           </p>
                       </div>
                   </div>
-              </form>
+              </div>
             </div>
             <div class="lg:w-1/2 xl:w-5/12 bg-indigo-100 text-start hidden lg:flex relative">
                 <img src="./images/brand-header.png" className='w-[60%] object-contain mx-auto' alt="" />
@@ -175,6 +190,9 @@ const StepThree = ({nextStep, prevStep}) => {
                 </div>
             </div>
         </div>
+        {
+          msg && <Alert msg={msg} setMsg={setMsg} alertType={alertType}/>
+        }
     </div>
   )
 }

@@ -8,16 +8,29 @@ import { FiFlag, FiHome, FiMail , FiPhone} from "react-icons/fi";
 import { PiCity } from "react-icons/pi";
 import { FaRegAddressBook } from "react-icons/fa";
 import { IoChevronDown } from "react-icons/io5";
-import { BsCalendarCheck } from "react-icons/bs";
+import Alert from '../alert/Alert';
 
-const StepTwo = ({nextStep, prevStep}) => {
+const StepTwo = ({nextStep, prevStep, userData, setEducationLevel, setCurrentEmployer, setPersonalReferenceEmail, setPersonalReferenceName, educationLevel, setPersonalReferencePhone}) => {
 
     const navigate = useNavigate()
-    const [passwordType, setPasswordType] = useState('password')
-    const [hearUsDropDown, setHearUsDropDown] = useState(false)
-    const [countryDropDown, setCountryDropDown] = useState(false)
+    const [educationLevelDropDown, setEducationLevelDropDown] = useState(false)
 
-    const aboutUs = ['High School', 'Diploma', 'Bachelors Degree', 'Master Degree', 'Doctorate Degree']
+    const educationLevels = ['High School', 'Diploma', 'Bachelors Degree', 'Master Degree', 'Doctorate Degree']
+
+    const [msg, setMsg] = useState('')
+    const [alertType, setAlertType] = useState()
+
+    function validateFormAndMoveToNextStep(){
+        console.log(userData);
+        if(!userData.currentEmployer || !userData.educationLevel || !userData.personalReferenceEmail || !userData.personalReferenceName || !userData.personalReferencePhone
+            ){
+                setMsg("Please Fill in all fields");
+                setAlertType('error');
+                return;
+            }else{
+            nextStep()
+        }
+    }
 
   return (
     <div class="min-h-screen bg-gray-100 text-gray-900 flex justify-center">
@@ -29,7 +42,7 @@ const StepTwo = ({nextStep, prevStep}) => {
                     <AiFillHome onClick={()=> navigate("/")} class="text-3xl border border-gray-300 text-gray-300 rounded-full p-1 hover:bg-gray-300 transition-all cursor-pointer hover:text-white"/>
                     <img src="./images/brand-header.png" className='w-[120px] mx-auto' alt="" />
                 </div>
-                <form class="mt-6 flex flex-col items-center">
+                <div class="mt-6 flex flex-col items-center">
                     <h1 class="text-xl xl:text-2xl font-[700] text-gray-700">
                         Sign up for an account
                     </h1>
@@ -46,16 +59,19 @@ const StepTwo = ({nextStep, prevStep}) => {
                                         class="w-full font-medium placeholder-gray-500 text-md outline-none placeholder:text-[16px]"
                                         type="text"
                                         placeholder="Highest Level of Education"
+                                        value={educationLevel}
                                     />
-                                    <IoChevronDown className='text-[24px] text-gray-500 cursor-pointer' onClick={() => setHearUsDropDown(!hearUsDropDown)}/>
+                                    <IoChevronDown className='text-[24px] text-gray-500 cursor-pointer' onClick={() => setEducationLevelDropDown(!educationLevelDropDown)}/>
                                     {
-                                        hearUsDropDown &&
+                                        educationLevelDropDown &&
                                         <div className='bg-white w-full absolute top-[45px] rounded-[4px] left-0 border'>
                                             {
-                                                aboutUs.map(about => (
-                                                    <p className='text-[14px] text-gray-500 hover:bg-gray-300 cursor-pointer p-[5px]' onClick={() => {
-                                                        setHearUsDropDown(!hearUsDropDown)
-                                                    }}>{about}</p>
+                                                educationLevels.map(level => (
+                                                    <p className='text-[14px] text-gray-500 hover:bg-gray-300 cursor-pointer p-[5px]' 
+                                                    onClick={() => {
+                                                        setEducationLevel(level)
+                                                        setEducationLevelDropDown(!educationLevels)
+                                                    }}>{level}</p>
                                                 ))
                                             }
                                         </div>
@@ -69,6 +85,8 @@ const StepTwo = ({nextStep, prevStep}) => {
                                         class="w-full font-medium placeholder-gray-500 text-md outline-none"
                                         type="text"
                                         placeholder="Current Employer"
+                                        onChange={e => setCurrentEmployer(e.target.value)}
+                                        value={userData.currentEmployer}
                                     />
                                 </div>
                             </div>
@@ -79,6 +97,8 @@ const StepTwo = ({nextStep, prevStep}) => {
                                         class="w-full font-medium placeholder-gray-500 text-md outline-none"
                                         type="text"
                                         placeholder="Personal Reference Name"
+                                        onChange={e => setPersonalReferenceName(e.target.value)}
+                                        value={userData.personalReferenceName}
                                     />
                                 </div>
                             </div>
@@ -89,6 +109,8 @@ const StepTwo = ({nextStep, prevStep}) => {
                                         class="w-full font-medium placeholder-gray-500 text-md outline-none"
                                         type="text"
                                         placeholder="Personal Reference Phone"
+                                        onChange={e => setPersonalReferencePhone(e.target.value)}
+                                        value={userData.personalReferencePhone}
                                     />
                                 </div>
                             </div>
@@ -99,6 +121,8 @@ const StepTwo = ({nextStep, prevStep}) => {
                                         class="w-full font-medium placeholder-gray-500 text-md outline-none"
                                         type="text"
                                         placeholder="Personal Reference Email"
+                                        onChange={e => setPersonalReferenceEmail(e.target.value)}
+                                        value={userData.personalReferenceEmail}
                                     />
                                 </div>
                             </div>
@@ -112,7 +136,7 @@ const StepTwo = ({nextStep, prevStep}) => {
                                     <span class="ml-3">Previous</span>
                                 </button>
                                 <button
-                                    onClick={() => nextStep()}
+                                    onClick={validateFormAndMoveToNextStep}
                                     class="mt-10 tracking-wide font-semibold bg-[#2B91F3] text-gray-100 w-full py-4 rounded-lg hover:bg-[#2b82f3] transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none"
                                 >
                                     <span class="ml-3">Next</span>
@@ -126,7 +150,7 @@ const StepTwo = ({nextStep, prevStep}) => {
                             </p>
                         </div>
                     </div>
-                </form>
+                </div>
             </div>
             <div class="lg:w-1/2 xl:w-5/12 bg-indigo-100 text-start hidden lg:flex relative">
                 <img src="./images/brand-header.png" className='w-[60%] object-contain mx-auto' alt="" />
@@ -168,6 +192,9 @@ const StepTwo = ({nextStep, prevStep}) => {
                 </div>
             </div>
         </div>
+        {
+          msg && <Alert msg={msg} setMsg={setMsg} alertType={alertType}/>
+        }
     </div>
   )
 }

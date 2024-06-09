@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { GoShieldCheck } from "react-icons/go";
 import { LuUser2 } from "react-icons/lu";
 import { MdDriveEta } from "react-icons/md";
 import { AiFillHome } from 'react-icons/ai';
@@ -8,20 +7,20 @@ import { FiFlag, FiHome, FiMail , FiPhone} from "react-icons/fi";
 import { PiCity } from "react-icons/pi";
 import { FaRegAddressBook } from "react-icons/fa";
 import { IoChevronDown } from "react-icons/io5";
-import { BsCalendarCheck } from "react-icons/bs";
 import Flatpickr from "react-flatpickr";
 import { BsCalendarDate } from "react-icons/bs";
 
 
 import "flatpickr/dist/themes/material_green.css";
+import Alert from '../alert/Alert';
 
-const StepOne = ({nextStep, prevStep}) => {
+const StepOne = ({nextStep, country, userData, setAddress, setCity, setCountry, setLastName, setFirstName, setEmail, setPhone, setDob, setDrivingLicense, setState, setZip}) => {
 
     const navigate = useNavigate()
-    const [passwordType, setPasswordType] = useState('password')
-    const [hearUsDropDown, setHearUsDropDown] = useState(false)
     const [countryDropDown, setCountryDropDown] = useState(false)
     const [allCountries, setAllCountries] = useState([])
+    const [msg, setMsg] = useState('')
+    const [alertType, setAlertType] = useState()
 
 
     async function getAllCountruies(){
@@ -36,6 +35,19 @@ const StepOne = ({nextStep, prevStep}) => {
         getAllCountruies()
     },[])
 
+    function validateFormAndMoveToNextStep(){
+        console.log(userData);
+        if(!userData.email || !userData.firstName || !userData.lastName || !userData.city || !userData.address
+            ||!userData.country ||!userData.state ||!userData.zip ||!userData.phone || !userData.drivingLicense
+            ){
+                setMsg("Please Fill in all fields");
+                setAlertType('error');
+                return;
+            }else{
+            nextStep()
+        }
+    }
+
   return (
     <div class="min-h-screen bg-gray-100 text-gray-900 flex justify-center">
         <div
@@ -46,7 +58,7 @@ const StepOne = ({nextStep, prevStep}) => {
                     <AiFillHome onClick={()=> navigate("/")} class="text-3xl border border-gray-300 text-gray-300 rounded-full p-1 hover:bg-gray-300 transition-all cursor-pointer hover:text-white"/>
                     <img src="./images/brand-header.png" className='w-[120px] mx-auto' alt="" />
                 </div>
-                    <form class="mt-6 flex flex-col items-center">
+                    <div class="mt-6 flex flex-col items-center">
                         <h1 class="text-xl xl:text-2xl font-[700] text-gray-700">
                             Sign up for an account
                         </h1>
@@ -64,6 +76,8 @@ const StepOne = ({nextStep, prevStep}) => {
                                             class="w-full font-medium placeholder-gray-500 text-md outline-none"
                                             type="text"
                                             placeholder="First Name"
+                                            onChange={(e) => setFirstName(e.target.value)}
+                                            value={userData.firstName}
                                         />
                                     </div>
                                     <div className='flex items-center gap-3 border-b border-gray-200 p-1'>
@@ -72,6 +86,8 @@ const StepOne = ({nextStep, prevStep}) => {
                                             class="w-full font-medium placeholder-gray-500 text-md outline-none"
                                             type="text"
                                             placeholder="Last Name"
+                                            onChange={(e) => setLastName(e.target.value)}
+                                            value={userData.lastName}
                                         />
                                     </div>
                                 </div>
@@ -82,6 +98,8 @@ const StepOne = ({nextStep, prevStep}) => {
                                             class="w-full font-medium placeholder-gray-500 text-md outline-none"
                                             type="text"
                                             placeholder="Email"
+                                            onChange={(e) => setEmail(e.target.value)}
+                                            value={userData.email}
                                         />
                                     </div>
                                     <div className='flex items-center gap-3 border-b border-gray-200 p-1'>
@@ -90,13 +108,17 @@ const StepOne = ({nextStep, prevStep}) => {
                                             class="w-full font-medium placeholder-gray-500 text-md outline-none"
                                             type="text"
                                             placeholder="Phone"
+                                            onChange={(e) => setPhone(e.target.value)}
+                                            value={userData.phone}
                                         />
                                     </div>
                                 </div>
                                 <div className='flex items-center gap-5 mt-[2.5rem]'>
                                     <div className='flex items-center gap-3 border-b border-gray-200 p-1 w-full'>
                                         <BsCalendarDate className='text-[24px] text-gray-500'/>
-                                        <Flatpickr placeholder='Date of birth' options={{ minDate: "1900-01-01" }} className='outline-none w-full placeholder-gray-500 font-medium'/>
+                                        <Flatpickr placeholder='Date of birth' options={{ minDate: "1900-01-01" }} 
+                                                    className='outline-none w-full placeholder-gray-500 font-medium' 
+                                                    onChange={setDob} value={userData.dob}/>
                                         {/* <input
                                             class="w-full font-medium placeholder-gray-500 text-md outline-none"
                                             type="text"
@@ -113,17 +135,19 @@ const StepOne = ({nextStep, prevStep}) => {
                                                 class="w-full font-medium placeholder-gray-500 text-md outline-none"
                                                 type="text"
                                                 placeholder="Country"
+                                                value={userData.country}
                                             />
                                         </div>
                                         <IoChevronDown className='text-[24px] text-gray-500 cursor-pointer' onClick={() => setCountryDropDown(!countryDropDown)}/>
                                         {
                                             countryDropDown &&
-                                            <div className='bg-white w-full absolute top-[45px] rounded-[4px] left-0 border'>
+                                            <div className='bg-white w-full absolute top-[45px] rounded-[4px] h-[350px] overflow-x-hidden overflow-y-scroll left-0 border'>
                                                 {
                                                     allCountries.map(country => (
                                                         <p className='text-[14px] text-gray-500 hover:bg-gray-300 cursor-pointer p-[5px]' onClick={() => {
                                                             setCountryDropDown(!countryDropDown)
-                                                        }}>{country}</p>
+                                                            setCountry(country.name.common)
+                                                        }}>{country.name.common}</p>
                                                     ))
                                                 }
                                             </div>
@@ -135,6 +159,8 @@ const StepOne = ({nextStep, prevStep}) => {
                                             class="w-full font-medium placeholder-gray-500 text-md outline-none"
                                             type="text"
                                             placeholder="State"
+                                            onChange={(e) => setState(e.target.value)}
+                                            value={userData.state}
                                         />
                                     </div>
                                 </div>
@@ -145,6 +171,8 @@ const StepOne = ({nextStep, prevStep}) => {
                                             class="w-full font-medium placeholder-gray-500 text-md outline-none"
                                             type="text"
                                             placeholder="City"
+                                            onChange={(e) => setCity(e.target.value)}
+                                            value={userData.city}
                                         />
                                     </div>
                                     <div className='flex items-center gap-3 border-b border-gray-200 p-1'>
@@ -153,6 +181,8 @@ const StepOne = ({nextStep, prevStep}) => {
                                             class="w-full font-medium placeholder-gray-500 text-md outline-none"
                                             type="text"
                                             placeholder="Address"
+                                            onChange={(e) => setAddress(e.target.value)}
+                                            value={userData.address}
                                         />
                                     </div>
                                 </div>
@@ -163,6 +193,8 @@ const StepOne = ({nextStep, prevStep}) => {
                                             class="w-full font-medium placeholder-gray-500 text-md outline-none"
                                             type="text"
                                             placeholder="Driving License"
+                                            onChange={(e) => setDrivingLicense(e.target.value)}
+                                            value={userData.drivingLicense}
                                         />
                                     </div>
                                     <div className='flex items-center gap-3 border-b border-gray-200 p-1'>
@@ -171,44 +203,14 @@ const StepOne = ({nextStep, prevStep}) => {
                                             class="w-full font-medium placeholder-gray-500 text-md outline-none"
                                             type="text"
                                             placeholder="Zip"
+                                            onChange={(e) => setZip(e.target.value)}
+                                            value={userData.zip}
                                         />
                                     </div>
                                 </div>
-
-                                {/* <p className='mb-6 underline mt-[4.5rem] text-gray-500 font-[600] text-lg'>Other Information</p>
-                                <div className='flex items-center gap-5'>
-                                    <div className='flex items-center gap-3 border-b border-gray-200 p-1'>
-                                        <BsCalendarCheck className='text-[24px] text-gray-500'/>
-                                        <input
-                                            class="w-full font-medium placeholder-gray-500 text-md outline-none"
-                                            type="number"
-                                            placeholder="Year Training Completed"
-                                        />
-                                    </div>
-                                    <div className='flex items-center gap-3 border-b border-gray-200 p-1 relative'>
-                                        <input
-                                            class="w-full font-medium placeholder-gray-500 text-md outline-none placeholder:text-[11px]"
-                                            type="text"
-                                            placeholder="How did you hear about this Alumni program?"
-                                        />
-                                        <IoChevronDown className='text-[24px] text-gray-500 cursor-pointer' onClick={() => setHearUsDropDown(!hearUsDropDown)}/>
-                                        {
-                                            hearUsDropDown &&
-                                            <div className='bg-white w-full absolute top-[45px] rounded-[4px] left-0 border'>
-                                                {
-                                                    aboutUs.map(about => (
-                                                        <p className='text-[14px] text-gray-500 hover:bg-gray-300 cursor-pointer p-[5px]' onClick={() => {
-                                                            setHearUsDropDown(!hearUsDropDown)
-                                                        }}>{about}</p>
-                                                    ))
-                                                }
-                                            </div>
-                                        }
-                                    </div>
-                                </div> */}
                                 
                                 <button
-                                    onClick={() => nextStep()}
+                                    onClick={validateFormAndMoveToNextStep}
                                     class="mt-10 tracking-wide font-semibold bg-[#2B91F3] text-gray-100 w-full py-4 rounded-lg hover:bg-[#2b82f3] transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none"
                                 >
                                     <span class="ml-3">Next</span>
@@ -221,7 +223,7 @@ const StepOne = ({nextStep, prevStep}) => {
                                 </p>
                             </div>
                         </div>
-                    </form>
+                    </div>
             </div>
             <div class="lg:w-1/2 xl:w-5/12 bg-indigo-100 text-start hidden lg:flex relative">
                 <img src="./images/brand-header.png" className='w-[60%] object-contain mx-auto' alt="" />
@@ -263,6 +265,9 @@ const StepOne = ({nextStep, prevStep}) => {
                 </div>
             </div>
         </div>
+        {
+          msg && <Alert msg={msg} setMsg={setMsg} alertType={alertType}/>
+        }
     </div>
   )
 }

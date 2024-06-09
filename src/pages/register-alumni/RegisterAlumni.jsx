@@ -104,12 +104,12 @@ const RegisterAlumni = () => {
                                         <IoChevronDown className='text-[24px] text-gray-500 cursor-pointer' onClick={() => setCountryDropDown(!countryDropDown)}/>
                                         {
                                             countryDropDown &&
-                                            <div className='bg-white w-full absolute top-[45px] rounded-[4px] left-0 border'>
+                                            <div className='bg-white w-full absolute top-[45px] rounded-[4px] h-[350px] overflow-x-hidden overflow-y-scroll left-0 border'>
                                                 {
                                                     allCountries.map(country => (
                                                         <p className='text-[14px] text-gray-500 hover:bg-gray-300 cursor-pointer p-[5px]' onClick={() => {
                                                             setCountryDropDown(!countryDropDown)
-                                                        }}>{country}</p>
+                                                        }}>{country.name.common}</p>
                                                     ))
                                                 }
                                             </div>
