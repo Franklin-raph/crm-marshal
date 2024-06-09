@@ -1,12 +1,8 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { GoShieldCheck } from "react-icons/go";
 import { LuUser2 } from "react-icons/lu";
-import { FaRegEye, FaRegEyeSlash } from "react-icons/fa6";
 import { AiFillHome } from 'react-icons/ai';
-import { FiFlag, FiHome, FiMail , FiPhone} from "react-icons/fi";
-import { PiCity } from "react-icons/pi";
-import { FaRegAddressBook } from "react-icons/fa";
+import { FiMail , FiPhone} from "react-icons/fi";
 import { IoChevronDown } from "react-icons/io5";
 import Alert from '../alert/Alert';
 
@@ -35,7 +31,7 @@ const StepTwo = ({nextStep, prevStep, userData, setEducationLevel, setCurrentEmp
   return (
     <div class="min-h-screen bg-gray-100 text-gray-900 flex justify-center">
         <div
-        class="max-w-screen-xl m-0 sm:m-20 bg-white shadow sm:rounded-lg flex justify-center flex-1"
+            class="max-w-screen-xl m-0 sm:m-20 bg-white shadow sm:rounded-lg flex justify-center flex-1"
         >
             <div class="flex-1 p-6 sm:p-12">
                 <div>
