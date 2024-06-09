@@ -45,7 +45,6 @@ const StepOne = ({nextStep, prevStep}) => {
                         <div class="w-full flex-1 mt-8">
                             <div class="mx-auto ">
                                 <p className='mb-6 underline mt-3 text-gray-500 font-[600] text-lg'>Personal and Contact Information</p>
-                                <p>Step 1</p>
                                 <div className='flex items-center gap-5'>
                                     <div className='flex items-center gap-3 border-b border-gray-200 p-1'>
                                         <LuUser2 className='text-[24px] text-gray-500'/>
@@ -83,9 +82,9 @@ const StepOne = ({nextStep, prevStep}) => {
                                     </div>
                                 </div>
                                 <div className='flex items-center gap-5 mt-[2.5rem]'>
-                                    <div className='flex items-center gap-3 border-b border-gray-200 p-1'>
+                                    <div className='flex items-center gap-3 border-b border-gray-200 p-1 w-full'>
                                         <BsCalendarDate className='text-[24px] text-gray-500'/>
-                                        <Flatpickr options={{ minDate: "1900-01-01" }} className='outline-none'/>
+                                        <Flatpickr placeholder='Date of birth' options={{ minDate: "1900-01-01" }} className='outline-none w-full placeholder-gray-500 font-medium'/>
                                         {/* <input
                                             class="w-full font-medium placeholder-gray-500 text-md outline-none"
                                             type="text"
@@ -149,7 +148,7 @@ const StepOne = ({nextStep, prevStep}) => {
                                     </div>
                                 </div>
 
-                                <p className='mb-6 underline mt-[4.5rem] text-gray-500 font-[600] text-lg'>Other Information</p>
+                                {/* <p className='mb-6 underline mt-[4.5rem] text-gray-500 font-[600] text-lg'>Other Information</p>
                                 <div className='flex items-center gap-5'>
                                     <div className='flex items-center gap-3 border-b border-gray-200 p-1'>
                                         <BsCalendarCheck className='text-[24px] text-gray-500'/>
@@ -179,7 +178,7 @@ const StepOne = ({nextStep, prevStep}) => {
                                             </div>
                                         }
                                     </div>
-                                </div>
+                                </div> */}
                                 
                                 <button
                                     onClick={() => nextStep()}
@@ -199,15 +198,42 @@ const StepOne = ({nextStep, prevStep}) => {
             </div>
             <div class="lg:w-1/2 xl:w-5/12 bg-indigo-100 text-start hidden lg:flex relative">
                 <img src="./images/brand-header.png" className='w-[60%] object-contain mx-auto' alt="" />
-                <div className='absolute bg-[#2b92f3c7] h-full flex items-center justify-start text-white w-full'>
-                    <div className='pl-[60px] md:pl-[75px]'>
-                        <p className='tracking-[5px]'>WELCOME TO</p>
-                        <p className='font-[600] tracking-[8px] text-[40px] drop-shadow-xl'>CRMMARSHAL</p>
-                        <div className='h-[1px] mt-[13px] mb-4 w-[60%] bg-white'></div>
-                        <p>Sign Up For an Account Today</p>
+                <div className='absolute  bg-[#2b92f3c7] h-full w-full flex items-center justify-start'>
+                    <div className='text-white'>
+                        <div className='pl-[60px] md:pl-[75px]'>
+                            <p className='tracking-[5px]'>WELCOME TO</p>
+                            <p className='font-[600] tracking-[8px] text-[40px] drop-shadow-xl'>CRMMARSHAL</p>
+                            <div className='h-[1px] mt-[13px] mb-4 w-[60%] bg-white'></div>
+                            <p>Sign Up For an Account Today</p>
+                        </div>
+                        <div className='pl-[60px] md:pl-[75px] mt-10 flex flex-col'>
+                            <div className='flex items-center gap-2'>
+                                <div className='p-3 rounded-full bg-gray-400 inline-flex'></div>
+                                <p className='font-[600] drop-shadow-xl'>Personal and Contact Information</p>
+                            </div>
+                            <div className='h-[100px] w-[4px] bg-gray-400 ml-[10px]'></div>
+                            <div className='flex items-center gap-2'>
+                                <div className='p-3 rounded-full bg-white inline-flex'></div>
+                                <p className='font-[600] drop-shadow-xl'>Education/Work Experience</p>
+                            </div>
+                            <div className='h-[100px] w-[4px] bg-white ml-[10px]'></div>
+                            <div className='flex items-center gap-2'>
+                                <div className='p-3 rounded-full bg-white inline-flex'></div>
+                                <p className='font-[600] drop-shadow-xl'>Emergency Contact Information</p>
+                            </div>
+                            <div className='h-[100px] w-[4px] bg-white ml-[10px]'></div>
+                            <div className='flex items-center gap-2'>
+                                <div className='p-3 rounded-full bg-white inline-flex'></div>
+                                <p className='font-[600] drop-shadow-xl'>Volunteer Position Information</p>
+                            </div>
+                            <div className='h-[100px] w-[4px] bg-white ml-[10px]'></div>
+                            <div className='flex items-center gap-2'>
+                                <div className='p-3 rounded-full bg-white inline-flex'></div>
+                                <p className='font-[600] drop-shadow-xl'>Profile Preview</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                {/* <img src="https://storage.googleapis.com/devitary-image-host.appspot.com/15848031292911696601-undraw_designer_life_w96d.svg" alt="" /> */}
             </div>
         </div>
     </div>

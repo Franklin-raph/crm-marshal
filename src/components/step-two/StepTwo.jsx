@@ -17,7 +17,7 @@ const StepTwo = ({nextStep, prevStep}) => {
     const [hearUsDropDown, setHearUsDropDown] = useState(false)
     const [countryDropDown, setCountryDropDown] = useState(false)
 
-    const aboutUs = ['Email', 'Linkedin', 'Advert', 'Other']
+    const aboutUs = ['High School', 'Diploma', 'Bachelors Degree', 'Master Degree', 'Doctorate Degree']
 
   return (
     <div class="min-h-screen bg-gray-100 text-gray-900 flex justify-center">
@@ -29,176 +29,143 @@ const StepTwo = ({nextStep, prevStep}) => {
                     <AiFillHome onClick={()=> navigate("/")} class="text-3xl border border-gray-300 text-gray-300 rounded-full p-1 hover:bg-gray-300 transition-all cursor-pointer hover:text-white"/>
                     <img src="./images/brand-header.png" className='w-[120px] mx-auto' alt="" />
                 </div>
-                    <form class="mt-6 flex flex-col items-center">
-                        <h1 class="text-xl xl:text-2xl font-[700] text-gray-700">
-                            Sign up for an account
-                        </h1>
-                        <div className='flex items-center gap-5 text-gray-500 font-[500] mt-6'>
-                            <button className='text-[#2B91F3] underline'>Register as a Volunteer</button>
-                          <button onClick={() => navigate('/register-alumni')}>Register as an Alumni</button>
-                        </div>
-                        <div class="w-full flex-1 mt-8">
-                            <div class="mx-auto ">
-                                <p className='mb-6 underline mt-3 text-gray-500 font-[600] text-lg'>Personal and Contact Information</p>
-                                <p>Step 2</p>
-                                <div className='flex items-center gap-5'>
-                                    <div className='flex items-center gap-3 border-b border-gray-200 p-1'>
-                                        <LuUser2 className='text-[24px] text-gray-500'/>
-                                        <input
-                                            class="w-full font-medium placeholder-gray-500 text-md outline-none"
-                                            type="text"
-                                            placeholder="First Name"
-                                        />
-                                    </div>
-                                    <div className='flex items-center gap-3 border-b border-gray-200 p-1'>
-                                        <LuUser2 className='text-[24px] text-gray-500'/>
-                                        <input
-                                            class="w-full font-medium placeholder-gray-500 text-md outline-none"
-                                            type="text"
-                                            placeholder="Last Name"
-                                        />
-                                    </div>
+                <form class="mt-6 flex flex-col items-center">
+                    <h1 class="text-xl xl:text-2xl font-[700] text-gray-700">
+                        Sign up for an account
+                    </h1>
+                    <div className='flex items-center gap-5 text-gray-500 font-[500] mt-6'>
+                        <button className='text-[#2B91F3] underline'>Register as a Volunteer</button>
+                        <button onClick={() => navigate('/register-alumni')}>Register as an Alumni</button>
+                    </div>
+                    <div class="w-full flex-1 mt-8">
+                        <div class="mx-auto ">
+                            <p className='mb-6 underline mt-3 text-gray-500 font-[600] text-lg'>Education/Work Experience</p>
+                            <div className='flex items-center gap-5'>
+                                <div className='flex items-center gap-3 border-b border-gray-200 p-1 relative w-full'>
+                                    <input
+                                        class="w-full font-medium placeholder-gray-500 text-md outline-none placeholder:text-[16px]"
+                                        type="text"
+                                        placeholder="Highest Level of Education"
+                                    />
+                                    <IoChevronDown className='text-[24px] text-gray-500 cursor-pointer' onClick={() => setHearUsDropDown(!hearUsDropDown)}/>
+                                    {
+                                        hearUsDropDown &&
+                                        <div className='bg-white w-full absolute top-[45px] rounded-[4px] left-0 border'>
+                                            {
+                                                aboutUs.map(about => (
+                                                    <p className='text-[14px] text-gray-500 hover:bg-gray-300 cursor-pointer p-[5px]' onClick={() => {
+                                                        setHearUsDropDown(!hearUsDropDown)
+                                                    }}>{about}</p>
+                                                ))
+                                            }
+                                        </div>
+                                    }
                                 </div>
-                                <div className='flex items-center gap-5 mt-[2.5rem]'>
-                                    <div className='flex items-center gap-3 border-b border-gray-200 p-1'>
-                                        <FiMail className='text-[24px] text-gray-500'/>
-                                        <input
-                                            class="w-full font-medium placeholder-gray-500 text-md outline-none"
-                                            type="text"
-                                            placeholder="Email"
-                                        />
-                                    </div>
-                                    <div className='flex items-center gap-3 border-b border-gray-200 p-1'>
-                                        <FiPhone className='text-[24px] text-gray-500'/>
-                                        <input
-                                            class="w-full font-medium placeholder-gray-500 text-md outline-none"
-                                            type="text"
-                                            placeholder="Phone"
-                                        />
-                                    </div>
-                                </div>
-                                <p className='mb-6 underline mt-[4.5rem] text-gray-500 font-[600] text-lg'>Residential Information</p>
-                                <div className='flex items-center gap-5'>
-                                    <div className='flex items-center gap-3 border-b border-gray-200 p-1'>
-                                        <FiFlag className='text-[24px] text-gray-500'/>
-                                        <input
-                                            class="w-full font-medium placeholder-gray-500 text-md outline-none"
-                                            type="text"
-                                            placeholder="Country"
-                                        />
-                                    </div>
-                                    <div className='flex items-center gap-3 border-b border-gray-200 p-1'>
-                                        <FiFlag className='text-[24px] text-gray-500'/>
-                                        <input
-                                            class="w-full font-medium placeholder-gray-500 text-md outline-none"
-                                            type="text"
-                                            placeholder="State"
-                                        />
-                                    </div>
-                                </div>
-                                <div className='flex items-center gap-5 mt-[2.5rem]'>
-                                    <div className='flex items-center gap-3 border-b border-gray-200 p-1'>
-                                        <PiCity className='text-[24px] text-gray-500'/>
-                                        <input
-                                            class="w-full font-medium placeholder-gray-500 text-md outline-none"
-                                            type="text"
-                                            placeholder="City"
-                                        />
-                                    </div>
-                                    <div className='flex items-center gap-3 border-b border-gray-200 p-1'>
-                                        <FaRegAddressBook className='text-[24px] text-gray-500'/>
-                                        <input
-                                            class="w-full font-medium placeholder-gray-500 text-md outline-none"
-                                            type="text"
-                                            placeholder="Address"
-                                        />
-                                    </div>
-                                </div>
-                                <div className='flex items-center gap-5 mt-[2.5rem]'>
-                                    <div className='flex items-center gap-3 border-b border-gray-200 p-1'>
-                                        <FiHome className='text-[24px] text-gray-500'/>
-                                        <input
-                                            class="w-full font-medium placeholder-gray-500 text-md outline-none"
-                                            type="text"
-                                            placeholder="Branch"
-                                        />
-                                    </div>
-                                    <div className='flex items-center gap-3 border-b border-gray-200 p-1'>
-                                        <FiHome className='text-[24px] text-gray-500'/>
-                                        <input
-                                            class="w-full font-medium placeholder-gray-500 text-md outline-none"
-                                            type="text"
-                                            placeholder="Zip"
-                                        />
-                                    </div>
-                                </div>
-
-                                <p className='mb-6 underline mt-[4.5rem] text-gray-500 font-[600] text-lg'>Other Information</p>
-                                <div className='flex items-center gap-5'>
-                                    <div className='flex items-center gap-3 border-b border-gray-200 p-1'>
-                                        <BsCalendarCheck className='text-[24px] text-gray-500'/>
-                                        <input
-                                            class="w-full font-medium placeholder-gray-500 text-md outline-none"
-                                            type="number"
-                                            placeholder="Year Training Completed"
-                                        />
-                                    </div>
-                                    <div className='flex items-center gap-3 border-b border-gray-200 p-1 relative'>
-                                        <input
-                                            class="w-full font-medium placeholder-gray-500 text-md outline-none placeholder:text-[11px]"
-                                            type="text"
-                                            placeholder="How did you hear about this Alumni program?"
-                                        />
-                                        <IoChevronDown className='text-[24px] text-gray-500 cursor-pointer' onClick={() => setHearUsDropDown(!hearUsDropDown)}/>
-                                        {
-                                            hearUsDropDown &&
-                                            <div className='bg-white w-full absolute top-[45px] rounded-[4px] left-0 border'>
-                                                {
-                                                    aboutUs.map(about => (
-                                                        <p className='text-[14px] text-gray-500 hover:bg-gray-300 cursor-pointer p-[5px]' onClick={() => {
-                                                            setHearUsDropDown(!hearUsDropDown)
-                                                        }}>{about}</p>
-                                                    ))
-                                                }
-                                            </div>
-                                        }
-                                    </div>
-                                </div>
-                                
-                                <div className='flex items-center gap-[3rem]'>
-                                    <button
-                                        onClick={() => prevStep()}
-                                        class="mt-10 tracking-wide font-semibold bg-[#2B91F3] text-gray-100 w-full py-4 rounded-lg hover:bg-[#2b82f3] transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none"
-                                    >
-                                        <span class="ml-3">Previous</span>
-                                    </button>
-                                    <button
-                                        class="mt-10 tracking-wide font-semibold bg-[#2B91F3] text-gray-100 w-full py-4 rounded-lg hover:bg-[#2b82f3] transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none"
-                                    >
-                                        <span class="ml-3">Next</span>
-                                    </button>
-                                </div>
-                                <p className='text-center text-[15px] text-gray-600 mt-5'>
-                                    Already have an account, <span className='text-[#2B91F3] cursor-pointer' onClick={() => navigate('/login')}>Sign in</span>
-                                </p>
-                                <p class="mt-6 text-xs text-gray-600 text-center">
-                                    I agree to the <span className='cursor-pointer text-[#2B91F3]'>terms and conditions</span>
-                                </p>
                             </div>
+                            <div className='flex items-center gap-5 mt-[2.5rem] w-full'>
+                                <div className='flex items-center gap-3 border-b border-gray-200 p-1 w-full'>
+                                    <LuUser2 className='text-[24px] text-gray-500'/>
+                                    <input
+                                        class="w-full font-medium placeholder-gray-500 text-md outline-none"
+                                        type="text"
+                                        placeholder="Current Employer"
+                                    />
+                                </div>
+                            </div>
+                            <div className='flex items-center gap-5 mt-[2.5rem] w-full'>
+                                <div className='flex items-center gap-3 border-b border-gray-200 p-1 w-full'>
+                                    <LuUser2 className='text-[24px] text-gray-500'/>
+                                    <input
+                                        class="w-full font-medium placeholder-gray-500 text-md outline-none"
+                                        type="text"
+                                        placeholder="Personal Reference Name"
+                                    />
+                                </div>
+                            </div>
+                            <div className='flex items-center gap-5 mt-[2.5rem] w-full'>
+                                <div className='flex items-center gap-3 border-b border-gray-200 p-1 w-full'>
+                                    <FiPhone className='text-[24px] text-gray-500'/>
+                                    <input
+                                        class="w-full font-medium placeholder-gray-500 text-md outline-none"
+                                        type="text"
+                                        placeholder="Personal Reference Phone"
+                                    />
+                                </div>
+                            </div>
+                            <div className='flex items-center gap-5 mt-[2.5rem] w-full'>
+                                <div className='flex items-center gap-3 border-b border-gray-200 p-1 w-full'>
+                                    <FiMail className='text-[24px] text-gray-500'/>
+                                    <input
+                                        class="w-full font-medium placeholder-gray-500 text-md outline-none"
+                                        type="text"
+                                        placeholder="Personal Reference Email"
+                                    />
+                                </div>
+                            </div>
+                            
+                            
+                            <div className='flex items-center gap-[3rem]'>
+                                <button
+                                    onClick={() => prevStep()}
+                                    class="mt-10 tracking-wide font-semibold bg-[#2B91F3] text-gray-100 w-full py-4 rounded-lg hover:bg-[#2b82f3] transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none"
+                                >
+                                    <span class="ml-3">Previous</span>
+                                </button>
+                                <button
+                                    onClick={() => nextStep()}
+                                    class="mt-10 tracking-wide font-semibold bg-[#2B91F3] text-gray-100 w-full py-4 rounded-lg hover:bg-[#2b82f3] transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none"
+                                >
+                                    <span class="ml-3">Next</span>
+                                </button>
+                            </div>
+                            <p className='text-center text-[15px] text-gray-600 mt-5'>
+                                Already have an account, <span className='text-[#2B91F3] cursor-pointer' onClick={() => navigate('/login')}>Sign in</span>
+                            </p>
+                            <p class="mt-6 text-xs text-gray-600 text-center">
+                                I agree to the <span className='cursor-pointer text-[#2B91F3]'>terms and conditions</span>
+                            </p>
                         </div>
-                    </form>
+                    </div>
+                </form>
             </div>
             <div class="lg:w-1/2 xl:w-5/12 bg-indigo-100 text-start hidden lg:flex relative">
                 <img src="./images/brand-header.png" className='w-[60%] object-contain mx-auto' alt="" />
-                <div className='absolute bg-[#2b92f3c7] h-full flex items-center justify-start text-white w-full'>
-                    <div className='pl-[60px] md:pl-[75px]'>
-                        <p className='tracking-[5px]'>WELCOME TO</p>
-                        <p className='font-[600] tracking-[8px] text-[40px] drop-shadow-xl'>CRMMARSHAL</p>
-                        <div className='h-[1px] mt-[13px] mb-4 w-[60%] bg-white'></div>
-                        <p>Sign Up For an Account Today</p>
+                <div className='absolute  bg-[#2b92f3c7] h-full w-full flex items-center justify-start'>
+                    <div className='text-white'>
+                        <div className='pl-[60px] md:pl-[75px]'>
+                            <p className='tracking-[5px]'>WELCOME TO</p>
+                            <p className='font-[600] tracking-[8px] text-[40px] drop-shadow-xl'>CRMMARSHAL</p>
+                            <div className='h-[1px] mt-[13px] mb-4 w-[60%] bg-white'></div>
+                            <p>Sign Up For an Account Today</p>
+                        </div>
+                        <div className='pl-[60px] md:pl-[75px] mt-10 flex flex-col'>
+                            <div className='flex items-center gap-2'>
+                                <div className='p-3 rounded-full bg-gray-400 inline-flex'></div>
+                                <p className='font-[600] drop-shadow-xl'>Personal and Contact Information</p>
+                            </div>
+                            <div className='h-[100px] w-[4px] bg-gray-400 ml-[10px]'></div>
+                            <div className='flex items-center gap-2'>
+                                <div className='p-3 rounded-full bg-gray-400 inline-flex'></div>
+                                <p className='font-[600] drop-shadow-xl'>Education/Work Experience</p>
+                            </div>
+                            <div className='h-[100px] w-[4px] bg-gray-400 ml-[10px]'></div>
+                            <div className='flex items-center gap-2'>
+                                <div className='p-3 rounded-full bg-white inline-flex'></div>
+                                <p className='font-[600] drop-shadow-xl'>Emergency Contact Information</p>
+                            </div>
+                            <div className='h-[100px] w-[4px] bg-white ml-[10px]'></div>
+                            <div className='flex items-center gap-2'>
+                                <div className='p-3 rounded-full bg-white inline-flex'></div>
+                                <p className='font-[600] drop-shadow-xl'>Volunteer Position Information</p>
+                            </div>
+                            <div className='h-[100px] w-[4px] bg-white ml-[10px]'></div>
+                            <div className='flex items-center gap-2'>
+                                <div className='p-3 rounded-full bg-white inline-flex'></div>
+                                <p className='font-[600] drop-shadow-xl'>Profile Preview</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                {/* <img src="https://storage.googleapis.com/devitary-image-host.appspot.com/15848031292911696601-undraw_designer_life_w96d.svg" alt="" /> */}
             </div>
         </div>
     </div>
