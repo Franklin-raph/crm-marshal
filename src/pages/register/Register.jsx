@@ -97,6 +97,68 @@ const Register = () => {
                             setHearAboutUs={setHearAboutUs}
                 />
             )
+        case 5:
+            return(
+                <div class="min-h-screen bg-gray-100 text-gray-900 flex justify-center">
+                    <div class="max-w-screen-xl m-0 sm:m-20 bg-white shadow sm:rounded-lg flex justify-center flex-1">
+                        <div class="flex-1 p-6 sm:p-12">
+                            <p className='text-[22px] text-gray-500 font-medium text-center'>Please confirm the following details before submitting</p>
+                            <div className='w-[55%] mx-auto'>
+                                <div className='flex items-center gap-5 mt-[2.5rem] w-full justify-between'>
+                                    <div className='flex gap-2 flex-col w-full'>
+                                        <p className='font-[500] text-gray-500'>First Name</p>
+                                        <p className='border border-gray-300 w-full px-2 py-[6px] rounded-[4px]'>{userData.firstName}</p>
+                                    </div>
+                                    <div className='flex flex-col gap-2 w-full'>
+                                        <p className='font-[500] text-gray-500'>Last Name</p>
+                                        <p className='border border-gray-300 w-full px-2 py-[6px] rounded-[4px]'>{userData.lastName}</p>
+                                    </div>
+                                </div>
+                                <div className='flex items-center gap-5 mt-[2rem] w-full justify-between'>
+                                    <div className='flex gap-2 flex-col w-full'>
+                                        <p className='font-[500] text-gray-500'>Email</p>
+                                        <p className='border border-gray-300 w-full px-2 py-[6px] rounded-[4px]'>{userData.email}</p>
+                                    </div>
+                                    <div className='flex flex-col gap-2 w-full'>
+                                        <p className='font-[500] text-gray-500'>Phone</p>
+                                        <p className='border border-gray-300 w-full px-2 py-[6px] rounded-[4px]'>{userData.phone}</p>
+                                    </div>
+                                </div>
+                                <div className='flex items-center gap-5 mt-[2rem] w-full justify-between'>
+                                    <div className='flex gap-2 flex-col w-full'>
+                                        <p className='font-[500] text-gray-500'>Date Of Birth</p>
+                                        <p className='border border-gray-300 w-full px-2 py-[6px] rounded-[4px]'>{userData?.dob[0]?.toLocaleDateString()}</p>
+                                    </div>
+                                    <div className='flex flex-col gap-2 w-full'>
+                                        <p className='font-[500] text-gray-500'>Country</p>
+                                        <p className='border border-gray-300 w-full px-2 py-[6px] rounded-[4px]'>{userData.country}</p>
+                                    </div>
+                                </div>
+                                <div className='flex items-center gap-5 mt-[2rem] w-full justify-between'>
+                                    <div className='flex gap-2 flex-col w-full'>
+                                        <p className='font-[500] text-gray-500'>City</p>
+                                        <p className='border border-gray-300 w-full px-2 py-[6px] rounded-[4px]'>{userData.city}</p>
+                                    </div>
+                                    <div className='flex flex-col gap-2 w-full'>
+                                        <p className='font-[500] text-gray-500'>State</p>
+                                        <p className='border border-gray-300 w-full px-2 py-[6px] rounded-[4px]'>{userData.state}</p>
+                                    </div>
+                                </div>
+                                <div className='flex items-center gap-5 mt-[2rem] w-full justify-between'>
+                                    <div className='flex gap-2 flex-col w-full'>
+                                        <p className='font-[500] text-gray-500'>Address</p>
+                                        <p className='border border-gray-300 w-full px-2 py-[6px] rounded-[4px]'>{userData.address}</p>
+                                    </div>
+                                    <div className='flex flex-col gap-2 w-full'>
+                                        <p className='font-[500] text-gray-500'>Zip</p>
+                                        <p className='border border-gray-300 w-full px-2 py-[6px] rounded-[4px]'>{userData.zip}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            )
     }
 }
 
