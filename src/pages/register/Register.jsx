@@ -13,6 +13,8 @@ import Alert from '../../components/alert/Alert';
 
 const Register = () => {
 
+    const navigate = useNavigate()
+
     // STEP 1 DETAILS
     const [firstName, setFirstName] = useState('')
     const [lastName, setLastName] = useState('')
