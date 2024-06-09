@@ -15,9 +15,10 @@ const StepFour = ({nextStep, prevStep}) => {
     const navigate = useNavigate()
     const [passwordType, setPasswordType] = useState('password')
     const [hearUsDropDown, setHearUsDropDown] = useState(false)
-    const [countryDropDown, setCountryDropDown] = useState(false)
+    const [positionDropDown, setPositionDropDown] = useState(false)
 
     const aboutUs = ['Email', 'Linkedin', 'Advert', 'Other']
+    const positions = ['Program Management', 'Cyber Security', 'Human Resources', 'Social Media', 'Trainer', 'Tech Support', 'Information Technology']
 
   return (
     <div class="min-h-screen bg-gray-100 text-gray-900 flex justify-center">
@@ -40,28 +41,28 @@ const StepFour = ({nextStep, prevStep}) => {
                     <div class="w-full flex-1 mt-8">
                         <div class="mx-auto ">
                             <p className='mb-6 underline mt-3 text-gray-500 font-[600] text-lg'>Volunteer Position Information</p>
-                            {/* <div className='flex items-center gap-5'>
+                            <div className='flex items-center gap-5'>
                                 <div className='flex items-center gap-3 border-b border-gray-200 p-1 relative w-full'>
                                     <input
                                         class="w-full font-medium placeholder-gray-500 text-md outline-none placeholder:text-[16px]"
                                         type="text"
-                                        placeholder="Highest Level of Education"
+                                        placeholder="What position(s) are you applying for? "
                                     />
-                                    <IoChevronDown className='text-[24px] text-gray-500 cursor-pointer' onClick={() => setHearUsDropDown(!hearUsDropDown)}/>
+                                    <IoChevronDown className='text-[24px] text-gray-500 cursor-pointer' onClick={() => setPositionDropDown(!positionDropDown)}/>
                                     {
-                                        hearUsDropDown &&
+                                        positionDropDown &&
                                         <div className='bg-white w-full absolute top-[45px] rounded-[4px] left-0 border'>
                                             {
-                                                aboutUs.map(about => (
+                                                positions.map(position => (
                                                     <p className='text-[14px] text-gray-500 hover:bg-gray-300 cursor-pointer p-[5px]' onClick={() => {
-                                                        setHearUsDropDown(!hearUsDropDown)
-                                                    }}>{about}</p>
+                                                        setPositionDropDown(!positionDropDown)
+                                                    }}>{position}</p>
                                                 ))
                                             }
                                         </div>
                                     }
                                 </div>
-                            </div> */}
+                            </div>
                             <div className='flex items-center gap-5 mt-[2.5rem] w-full'>
                                 <div className='flex items-center gap-3 border-b border-gray-200 p-1 w-full'>
                                     <LuUser2 className='text-[24px] text-gray-500'/>
@@ -165,10 +166,10 @@ const StepFour = ({nextStep, prevStep}) => {
                             </div>
                             <div className='h-[100px] w-[4px] bg-gray-400 ml-[10px]'></div>
                             <div className='flex items-center gap-2'>
-                                <div className='p-3 rounded-full bg-white inline-flex'></div>
+                                <div className='p-3 rounded-full bg-gray-400 inline-flex'></div>
                                 <p className='font-[600] drop-shadow-xl'>Volunteer Position Information</p>
                             </div>
-                            <div className='h-[100px] w-[4px] bg-white ml-[10px]'></div>
+                            <div className='h-[100px] w-[4px] bg-gray-400 ml-[10px]'></div>
                             <div className='flex items-center gap-2'>
                                 <div className='p-3 rounded-full bg-white inline-flex'></div>
                                 <p className='font-[600] drop-shadow-xl'>Profile Preview</p>
