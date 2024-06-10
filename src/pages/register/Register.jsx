@@ -14,6 +14,7 @@ import Alert from '../../components/alert/Alert';
 const Register = () => {
 
     const navigate = useNavigate()
+    const [isChecked, setIsChecked] = useState()
 
     // STEP 1 DETAILS
     const [firstName, setFirstName] = useState('')
@@ -73,9 +74,20 @@ const Register = () => {
         setFormStep(formStep - 1)
     }
 
+    const handleCheckboxChange = (event) => {
+        setIsChecked(event.target.checked);
+    };
+
     async function submitForm(){
-        setMsg("Form Submitted Successfully");
-        setAlertType('success');
+        console.log(isChecked);
+        if(isChecked === false){
+            setMsg("Please accept the terms and conditions");
+            setAlertType('error');
+            return;
+        }else{
+            setMsg("Form Submitted Successfully");
+            setAlertType('success');
+        }
     }
 
     switch (formStep) {
@@ -301,6 +313,10 @@ const Register = () => {
                                         ))}
                                     </div>
                                 </div>
+                            </div>
+                            <div className='mt-5 text-[12px] flex items-center gap-1'>
+                                <input type="checkbox" onChange={event => setIsChecked(event.target.checked)} value={isChecked} />
+                                <p>By submitting this form, you agree that all information is true to the best of your knowledge.</p>
                             </div>
                             <div className='flex items-center gap-[3rem]'>
                                 <button
