@@ -9,6 +9,8 @@ import { FaRegAddressBook } from "react-icons/fa";
 import { IoChevronDown } from "react-icons/io5";
 import Flatpickr from "react-flatpickr";
 import { BsCalendarDate } from "react-icons/bs";
+import { FiLoader } from "react-icons/fi";
+
 
 
 import "flatpickr/dist/themes/material_green.css";
@@ -22,11 +24,14 @@ const StepOne = ({nextStep, country, userData, setAddress, setCity, setCountry, 
     const [msg, setMsg] = useState('')
     const [alertType, setAlertType] = useState()
     const [searchText, setSeacrhText] = useState('')
+    const [loader, setLoader] = useState(false)
 
 
     async function getAllCountruies(){
+        setLoader(true)
         const response = await fetch('https://restcountries.com/v3.1/all')
         const data = await response.json()
+        if(response) setLoader(false)
         console.log(data.sort((a, b) => a.name.common.localeCompare(b.name.common)))
         setAllCountries(data.sort((a, b) => a.name.common.localeCompare(b.name.common)))
         return data
@@ -144,18 +149,30 @@ const StepOne = ({nextStep, country, userData, setAddress, setCity, setCountry, 
                                             countryDropDown &&
                                             <div className='bg-white w-full absolute top-[45px] rounded-[4px] border border-gray-300 h-[350px] overflow-x-hidden overflow-y-scroll left-0 px-2 py-3'>
                                                 <input type="text" onChange={e => setSeacrhText(e.target.value)} placeholder='Search Country' className='border border-gray-300 w-full placeholder:text-[13px] text-[13px] outline-none px-[4px] rounded mb-1 py-[5px]'/>
-                                                {
-                                                    allCountries.filter(country => country.name.common.toLowerCase().includes(searchText.toLowerCase()))
-                                                    .map((country) => (
-                                                        <div className='flex items-center gap-2 hover:bg-gray-300 cursor-pointer p-[5px] text-[14px] text-gray-500'onClick={() => {
-                                                            setCountryDropDown(!countryDropDown)
-                                                            setCountry(country.name.common)
-                                                        }}>
-                                                            <img src={country.flags.svg} className=' w-[30px]' alt="" />
-                                                            <p>{country.name.common}</p>
+                                                <div>
+                                                    {
+                                                        loader ?
+                                                        <div className='flex items-center justify-center flex-col gap-3 mt-[7rem]'>
+                                                            <FiLoader className='text-[28px] animate-spin'/>
+                                                            <p className='text-gray-500 text-[14px]'>Fetching Countries Please Wait...</p>
                                                         </div>
-                                                    ))
-                                                }
+                                                        :
+                                                        <>
+                                                        {
+                                                            allCountries.filter(country => country.name.common.toLowerCase().includes(searchText.toLowerCase()))
+                                                            .map((country) => (
+                                                                <div className='flex items-center gap-2 hover:bg-gray-300 cursor-pointer p-[5px] text-[14px] text-gray-500'onClick={() => {
+                                                                    setCountryDropDown(!countryDropDown)
+                                                                    setCountry(country.name.common)
+                                                                }}>
+                                                                    <img src={country.flags.svg} className=' w-[30px]' alt="" />
+                                                                    <p>{country.name.common}</p>
+                                                                </div>
+                                                            ))
+                                                        }
+                                                        </>
+                                                    }
+                                                </div>
                                             </div>
                                         }
                                     </div>
