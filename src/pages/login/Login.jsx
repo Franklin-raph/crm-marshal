@@ -13,6 +13,11 @@ const Login = () => {
     const navigate = useNavigate()
     const [passwordType, setPasswordType] = useState('password')
 
+    function handleSignIn(e){
+        e.preventDefault()
+        navigate('/register')
+    }
+
   return (
     <div class="min-h-screen bg-gray-100 text-gray-900 flex justify-center">
         <div
@@ -23,7 +28,7 @@ const Login = () => {
                     <AiFillHome onClick={()=> navigate("/")} class="text-3xl border border-gray-300 text-gray-300 rounded-full p-1 hover:bg-gray-300 transition-all cursor-pointer hover:text-white"/>
                     <img src="./images/brand-header.png" className='w-[120px] mx-auto' alt="" />
                 </div>
-                    <form class="mt-12 flex flex-col items-center">
+                    <form onSubmit={handleSignIn} class="mt-12 flex flex-col items-center">
                         <h1 class="text-xl xl:text-2xl font-[700] text-gray-700">
                             Sign in to your account
                         </h1>
@@ -60,7 +65,7 @@ const Login = () => {
                                     type='submit'
                                     class="mt-5 tracking-wide font-semibold bg-[#2B91F3] text-gray-100 w-full py-4 rounded-lg hover:bg-[#2b82f3] transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none"
                                 >
-                                    <span class="ml-3">Sign In</span>
+                                    <span>Sign In</span>
                                 </button>
                                 <p className='text-center text-[15px] text-gray-600 mt-5'>
                                     Don't have an account, <span className='text-[#2B91F3] cursor-pointer' onClick={() => navigate('/register')}>Sign up</span>

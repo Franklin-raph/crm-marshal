@@ -118,15 +118,15 @@ const Register = () => {
             <div class="flex-1 p-6 sm:p-12">
                 <div>
                     <AiFillHome onClick={()=> navigate("/")} class="text-3xl border border-gray-300 text-gray-300 rounded-full p-1 hover:bg-gray-300 transition-all cursor-pointer hover:text-white"/>
-                    <img src="./images/brand-header.png" className='w-[120px] mx-auto' alt="" />
+                    <img src="./images/brand-header.png" className='sm:w-[120px] w-[60px] mx-auto' alt="" />
                 </div>
                 <div class="mt-6 flex flex-col items-center">
                     <h1 class="text-xl xl:text-2xl font-[700] text-gray-700">
                         Sign up for an account
                     </h1>
                     <div className='flex items-center gap-5 text-gray-500 font-[500] mt-6'>
-                        <button className='text-[#2B91F3] underline'>Register as a Volunteer</button>
-                        <button onClick={() => navigate('/register-alumni')}>Register as an Alumni</button>
+                        <button className='text-[#2B91F3] underline text-[12px] sm:text-[16px]'>Register as a Volunteer</button>
+                        <button onClick={() => navigate('/register-alumni')} className='text-[12px] sm:text-[16px]'>Register as an Alumni</button>
                     </div>
                     <div class="w-full flex-1 mt-8">
                         <div>
