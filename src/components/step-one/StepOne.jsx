@@ -57,20 +57,20 @@ const StepOne = ({nextStep, country, userData, setAddress, setCity, setCountry, 
             <div class="flex-1 p-6 sm:p-12">
                 <div>
                     <AiFillHome onClick={()=> navigate("/")} class="text-3xl border border-gray-300 text-gray-300 rounded-full p-1 hover:bg-gray-300 transition-all cursor-pointer hover:text-white"/>
-                    <img src="./images/brand-header.png" className='w-[120px] mx-auto' alt="" />
+                    <img src="./images/brand-header.png" className='sm:w-[120px] w-[60px] mx-auto' alt="" />
                 </div>
                     <div class="mt-6 flex flex-col items-center">
                         <h1 class="text-xl xl:text-2xl font-[700] text-gray-700">
                             Sign up for an account
                         </h1>
                         <div className='flex items-center gap-5 text-gray-500 font-[500] mt-6'>
-                            <button className='text-[#2B91F3] underline'>Register as a Volunteer</button>
-                          <button onClick={() => navigate('/register-alumni')}>Register as an Alumni</button>
+                            <button className='text-[#2B91F3] underline text-[12px] sm:text-[16px]'>Register as a Volunteer</button>
+                            <button onClick={() => navigate('/register-alumni')} className='text-[12px] sm:text-[16px]'>Register as an Alumni</button>
                         </div>
                         <div class="w-full flex-1 mt-8">
                             <div class="mx-auto ">
                                 <p className='mb-6 underline mt-3 text-gray-500 font-[600] text-lg'>Personal and Contact Information</p>
-                                <div className='flex items-center gap-5'>
+                                <div className='flex items-center sm:gap-5 flex-col sm:flex-row gap-10'>
                                     <div className='flex items-center gap-3 border-b border-gray-200 p-1  w-full'>
                                         <LuUser2 className='text-[24px] text-gray-500'/>
                                         <input
@@ -92,7 +92,7 @@ const StepOne = ({nextStep, country, userData, setAddress, setCity, setCountry, 
                                         />
                                     </div>
                                 </div>
-                                <div className='flex items-center gap-5 mt-[2.5rem]'>
+                                <div className='flex items-center sm:gap-5 flex-col sm:flex-row gap-10 mt-[2.5rem]'>
                                     <div className='flex items-center gap-3 border-b border-gray-200 p-1 w-full'>
                                         <FiMail className='text-[24px] text-gray-500'/>
                                         <input
@@ -114,11 +114,11 @@ const StepOne = ({nextStep, country, userData, setAddress, setCity, setCountry, 
                                         />
                                     </div>
                                 </div>
-                                <div className='flex items-center gap-5 mt-[2.5rem]'>
+                                <div className='flex items-center sm:gap-5 flex-col sm:flex-row gap-10 mt-[2.5rem]'>
                                     <div className='flex items-center gap-3 border-b border-gray-200 p-1 w-full'>
                                         <BsCalendarDate className='text-[24px] text-gray-500'/>
                                         <Flatpickr placeholder='Date of birth' options={{ minDate: "1900-01-01" }} 
-                                                    className='outline-none w-full placeholder-gray-500 font-medium' 
+                                                    className='outline-none w-full placeholder-gray-500 font-medium bg-transparent' 
                                                     onChange={setDob} value={userData.dob}/>
                                         {/* <input
                                             class="w-full font-medium placeholder-gray-500 text-md outline-none"
@@ -128,9 +128,9 @@ const StepOne = ({nextStep, country, userData, setAddress, setCity, setCountry, 
                                     </div>
                                 </div>
                                 <p className='mb-6 underline mt-[4.5rem] text-gray-500 font-[600] text-lg'>Residential Information</p>
-                                <div className='flex items-center gap-5'>
+                                <div className='flex items-center sm:gap-5 flex-col sm:flex-row gap-10'>
                                     <div className='flex items-center gap-3 border-b border-gray-200 p-1 relative w-full'>
-                                        <div className='flex items-center gap-3'>
+                                        <div className='flex items-center gap-3 w-full'>
                                             <FiFlag className='text-[24px] text-gray-500'/>
                                             <input
                                                 class="w-full font-medium placeholder-gray-500 text-md outline-none"
@@ -142,8 +142,8 @@ const StepOne = ({nextStep, country, userData, setAddress, setCity, setCountry, 
                                         <IoChevronDown className='text-[24px] text-gray-500 cursor-pointer' onClick={() => setCountryDropDown(!countryDropDown)}/>
                                         {
                                             countryDropDown &&
-                                            <div className='bg-white w-full absolute top-[45px] rounded-[4px] border border-gray-500 h-[350px] overflow-x-hidden overflow-y-scroll left-0'>
-                                                <input type="text" onChange={e => setSeacrhText(e.target.value)} placeholder='Search Country' className='border border-gray-500 w-full m-2 placeholder:text-[13px] text-[13px] outline-none px-[2px] py-[2px]'/>
+                                            <div className='bg-white w-full absolute top-[45px] rounded-[4px] border border-gray-300 h-[350px] overflow-x-hidden overflow-y-scroll left-0 px-2 py-3'>
+                                                <input type="text" onChange={e => setSeacrhText(e.target.value)} placeholder='Search Country' className='border border-gray-300 w-full placeholder:text-[13px] text-[13px] outline-none px-[4px] rounded mb-1 py-[5px]'/>
                                                 {
                                                     allCountries.filter(country => country.name.common.toLowerCase().includes(searchText.toLowerCase()))
                                                     .map((country) => (
@@ -170,7 +170,7 @@ const StepOne = ({nextStep, country, userData, setAddress, setCity, setCountry, 
                                         />
                                     </div>
                                 </div>
-                                <div className='flex items-center gap-5 mt-[2.5rem]'>
+                                <div className='flex items-center sm:gap-5 flex-col sm:flex-row gap-10 mt-[2.5rem]'>
                                     <div className='flex items-center gap-3 border-b border-gray-200 p-1 w-full'>
                                         <PiCity className='text-[24px] text-gray-500'/>
                                         <input
@@ -192,7 +192,7 @@ const StepOne = ({nextStep, country, userData, setAddress, setCity, setCountry, 
                                         />
                                     </div>
                                 </div>
-                                <div className='flex items-center gap-5 mt-[2.5rem]'>
+                                <div className='flex items-center sm:gap-5 flex-col sm:flex-row gap-10 mt-[2.5rem]'>
                                     <div className='flex items-center gap-3 border-b border-gray-200 p-1 w-full'>
                                         <MdDriveEta className='text-[24px] text-gray-500'/>
                                         <input

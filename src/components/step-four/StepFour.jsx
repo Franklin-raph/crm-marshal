@@ -72,8 +72,8 @@ const StepFour = ({nextStep, prevStep, userData, setPosition, setSkill, setExper
                         Sign up for an account
                     </h1>
                     <div className='flex items-center gap-5 text-gray-500 font-[500] mt-6'>
-                        <button className='text-[#2B91F3] underline'>Register as a Volunteer</button>
-                        <button onClick={() => navigate('/register-alumni')}>Register as an Alumni</button>
+                        <button className='text-[#2B91F3] underline text-[12px] sm:text-[16px]'>Register as a Volunteer</button>
+                        <button onClick={() => navigate('/register-alumni')} className='text-[12px] sm:text-[16px]'>Register as an Alumni</button>
                     </div>
                     <div class="w-full flex-1 mt-8">
                         <div class="mx-auto ">
@@ -81,7 +81,7 @@ const StepFour = ({nextStep, prevStep, userData, setPosition, setSkill, setExper
                             <div className='flex items-center gap-5'>
                                 <div className='flex items-center gap-3 border-b border-gray-200 p-1 relative w-full'>
                                     <input
-                                        class="w-full font-medium placeholder-gray-500 text-md outline-none placeholder:text-[16px]"
+                                        class="w-full text-[10px] md:text-[16px] sm:text-[12px] font-medium placeholder-gray-500 text-md outline-none placeholder:text-[10px] md:placeholder:text-[16px] sm:placeholder:text-[12px]"
                                         type="text"
                                         placeholder="What position(s) are you applying for?"
                                         value={
@@ -112,7 +112,7 @@ const StepFour = ({nextStep, prevStep, userData, setPosition, setSkill, setExper
                                 <div className='flex items-center gap-3 border-b border-gray-200 p-1 w-full'>
                                     <LuUser2 className='text-[24px] text-gray-500'/>
                                     <input
-                                        class="w-full font-medium placeholder-gray-500 text-md outline-none"
+                                        class="w-full text-[10px] md:text-[16px] sm:text-[12px] font-medium placeholder-gray-500 text-md outline-none placeholder:text-[10px] md:placeholder:text-[16px] sm:placeholder:text-[12px]"
                                         type="text"
                                         placeholder="What skills can you contribute to the Organization?"
                                         onChange={e => setSkill(e.target.value)}
@@ -124,7 +124,7 @@ const StepFour = ({nextStep, prevStep, userData, setPosition, setSkill, setExper
                                 <div className='flex items-center gap-3 border-b border-gray-200 p-1 w-full'>
                                     <LuUser2 className='text-[24px] text-gray-500'/>
                                     <input
-                                        class="w-full font-medium placeholder-gray-500 text-md outline-none"
+                                        class="w-full text-[10px] md:text-[16px] sm:text-[12px] font-medium placeholder-gray-500 text-md outline-none placeholder:text-[10px] md:placeholder:text-[16px] sm:placeholder:text-[12px]"
                                         type="text"
                                         placeholder="What experience do you have in this area?"
                                         onChange={e => setExperience(e.target.value)}
@@ -134,7 +134,7 @@ const StepFour = ({nextStep, prevStep, userData, setPosition, setSkill, setExper
                             </div>
                             <div className='flex items-center gap-3 border-b border-gray-200 p-1 relative mt-[2.5rem]'>
                                 <input
-                                    class="w-full font-medium placeholder-gray-500 text-md outline-none"
+                                    class="w-full text-[10px] md:text-[16px] sm:text-[12px] font-medium placeholder-gray-500 text-md outline-none placeholder:text-[10px] md:placeholder:text-[16px] sm:placeholder:text-[12px]"
                                     type="text"
                                     placeholder="What is your availability to volunteer?"
                                     value={
@@ -174,7 +174,7 @@ const StepFour = ({nextStep, prevStep, userData, setPosition, setSkill, setExper
                                 <div className='flex items-center gap-3 border-b border-gray-200 p-1 w-full'>
                                     <FiPhone className='text-[24px] text-gray-500'/>
                                     <input
-                                        class="w-full font-medium placeholder-gray-500 text-md outline-none"
+                                        class="w-full text-[10px] md:text-[16px] sm:text-[12px] font-medium placeholder-gray-500 text-md outline-none placeholder:text-[10px] md:placeholder:text-[16px] sm:placeholder:text-[12px]"
                                         type="text"
                                         placeholder="What interests you about our organization?"
                                         onChange={e => setInterest(e.target.value)}
@@ -184,7 +184,7 @@ const StepFour = ({nextStep, prevStep, userData, setPosition, setSkill, setExper
                             </div>
                             <div className='flex items-center gap-3 border-b border-gray-200 p-1 relative mt-[2.5rem]'>
                                 <input
-                                    class="w-full font-medium placeholder-gray-500 text-md outline-none"
+                                    class="w-full text-[10px] md:text-[16px] sm:text-[12px] font-medium placeholder-gray-500 text-md outline-none placeholder:text-[10px] md:placeholder:text-[16px] sm:placeholder:text-[12px]"
                                     type="text"
                                     placeholder="How did you hear about this Alumni program?"
                                     value={userData.hearAboutUs}

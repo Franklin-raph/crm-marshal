@@ -43,8 +43,8 @@ const StepTwo = ({nextStep, prevStep, userData, setEducationLevel, setCurrentEmp
                         Sign up for an account
                     </h1>
                     <div className='flex items-center gap-5 text-gray-500 font-[500] mt-6'>
-                        <button className='text-[#2B91F3] underline'>Register as a Volunteer</button>
-                        <button onClick={() => navigate('/register-alumni')}>Register as an Alumni</button>
+                        <button className='text-[#2B91F3] underline text-[12px] sm:text-[16px]'>Register as a Volunteer</button>
+                        <button onClick={() => navigate('/register-alumni')} className='text-[12px] sm:text-[16px]'>Register as an Alumni</button>
                     </div>
                     <div class="w-full flex-1 mt-8">
                         <div class="mx-auto ">
@@ -129,13 +129,13 @@ const StepTwo = ({nextStep, prevStep, userData, setEducationLevel, setCurrentEmp
                                     onClick={() => prevStep()}
                                     class="mt-10 tracking-wide font-semibold bg-[#2B91F3] text-gray-100 w-full py-4 rounded-lg hover:bg-[#2b82f3] transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none"
                                 >
-                                    <span class="ml-3">Previous</span>
+                                    <span>Previous</span>
                                 </button>
                                 <button
                                     onClick={validateFormAndMoveToNextStep}
                                     class="mt-10 tracking-wide font-semibold bg-[#2B91F3] text-gray-100 w-full py-4 rounded-lg hover:bg-[#2b82f3] transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none"
                                 >
-                                    <span class="ml-3">Next</span>
+                                    <span>Next</span>
                                 </button>
                             </div>
                             <p className='text-center text-[15px] text-gray-600 mt-5'>

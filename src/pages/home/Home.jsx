@@ -7,7 +7,7 @@ const Home = () => {
 
   return (
     <div className='max-w-[1400px] mx-auto bg-[#F3F4F6]'>
-        <nav className='flex items-center justify-between px-[5rem] py-4 shadow-sm'>
+        <nav className='flex items-center justify-between px-[1.5rem] md:px-[5rem] py-4 shadow-sm'>
             <Link to='/' className='flex items-center gap-3'>
                 <img src="./images/brand-header.png" className='w-[35px]' alt="" />
                 <p className='font-[600] text-gray-500'>INFOTECH IMPACT</p>

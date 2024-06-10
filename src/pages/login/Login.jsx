@@ -47,11 +47,11 @@ const Login = () => {
                                         />
                                         {
                                             passwordType === 'password' &&
-                                                <FaRegEye onClick={() => setPasswordType('text')} className='cursor-pointer'/>
+                                                <FaRegEye onClick={() => setPasswordType('text')} className='cursor-pointer text-gray-500'/>
                                         }
                                         {
                                             passwordType === 'text' &&
-                                                <FaRegEyeSlash onClick={() => setPasswordType('password')} className='cursor-pointer'/>
+                                                <FaRegEyeSlash onClick={() => setPasswordType('password')} className='cursor-pointer text-gray-500'/>
                                         }
                                     </div>
                                 </div>

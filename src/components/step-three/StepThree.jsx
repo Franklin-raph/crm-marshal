@@ -41,8 +41,8 @@ const StepThree = ({nextStep, prevStep, userData, setEmergencyContact, setRelati
                       Sign up for an account
                   </h1>
                   <div className='flex items-center gap-5 text-gray-500 font-[500] mt-6'>
-                      <button className='text-[#2B91F3] underline'>Register as a Volunteer</button>
-                    <button onClick={() => navigate('/register-alumni')}>Register as an Alumni</button>
+                        <button className='text-[#2B91F3] underline text-[12px] sm:text-[16px]'>Register as a Volunteer</button>
+                        <button onClick={() => navigate('/register-alumni')} className='text-[12px] sm:text-[16px]'>Register as an Alumni</button>
                   </div>
                   <div class="w-full flex-1 mt-8">
                       <div class="mx-auto ">
@@ -107,7 +107,7 @@ const StepThree = ({nextStep, prevStep, userData, setEmergencyContact, setRelati
                           </div>
                           <p className='text-red-500 text-[12px] mt-[2.5rem]'>All applicants must answer the following questions. Failure to answer disqualifies you from service as a volunteer with our organization</p>
                           <div className='mt-3'>
-                            <p className='text-gray-500 mb-3'>Have you been convicted of a felony or a misdemeanor?</p>
+                            <p className='text-gray-500 mb-3 text-[12px] md:text-[16px]'>Have you been convicted of a felony or a misdemeanor?</p>
                             <div className='flex items-center justify-between w-[50%]'>
                                 {
                                     convicteArray.map(convict => (
@@ -122,7 +122,7 @@ const StepThree = ({nextStep, prevStep, userData, setEmergencyContact, setRelati
                           {
                             userData.convicted === 'Yes' &&
                             <div className='flex items-center gap-5 mt-[2.5rem] w-full'>
-                                <textarea onChange={e => setReasonForConviction(e.target.value)} value={userData.reasonForConviction} className='w-full border-gray-200 border rounded-[6px] p-4 outline-none resize-none' placeholder='Describe the conviction. Include the type of crime, date, city, country, state where the crime took place' cols="10" rows="5"></textarea>
+                                <textarea onChange={e => setReasonForConviction(e.target.value)} value={userData.reasonForConviction} className='w-full border-gray-200 border rounded-[6px] p-4 outline-none resize-none placeholder:text-[10px] md:placeholder:text-[16px] sm:placeholder:text-[12px] text-[10px] md:text-[16px] sm:text-[12px]' placeholder='Describe the conviction. Include the type of crime, date, city, country, state where the crime took place' cols="10" rows="5"></textarea>
                             </div>
                           }
                           
@@ -131,13 +131,13 @@ const StepThree = ({nextStep, prevStep, userData, setEmergencyContact, setRelati
                                   onClick={() => prevStep()}
                                   class="mt-10 tracking-wide font-semibold bg-[#2B91F3] text-gray-100 w-full py-4 rounded-lg hover:bg-[#2b82f3] transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none"
                               >
-                                  <span class="ml-3">Previous</span>
+                                  <span>Previous</span>
                               </button>
                               <button
                                   onClick={validateFormAndMoveToNextStep}
                                   class="mt-10 tracking-wide font-semibold bg-[#2B91F3] text-gray-100 w-full py-4 rounded-lg hover:bg-[#2b82f3] transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none"
                               >
-                                  <span class="ml-3">Next</span>
+                                  <span>Next</span>
                               </button>
                           </div>
                           <p className='text-center text-[15px] text-gray-600 mt-5'>

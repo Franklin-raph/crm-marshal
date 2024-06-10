@@ -132,7 +132,7 @@ const Register = () => {
                         <div>
                             <div className='w-[100%] mx-auto'>
                                 <p className='underline mb-6 mt-[3rem] text-gray-500 font-[600] text-lg'>Personal and Contact Information</p>
-                                <div className='flex items-center gap-5 mt-[1.5rem] w-full justify-between'>
+                                <div className='flex items-center flex-col md:flex-row gap-5 mt-[1.5rem] w-full justify-between'>
                                     <div className='flex gap-2 flex-col w-full'>
                                         <p className='font-[500] text-gray-500'>First Name</p>
                                         <p className='border border-gray-300 w-full px-2 py-[6px] rounded-[4px]'>{userData.firstName}</p>
@@ -146,7 +146,7 @@ const Register = () => {
                                         <p className='border border-gray-300 w-full px-2 py-[6px] rounded-[4px]'>{userData.email}</p>
                                     </div>
                                 </div>
-                                <div className='flex items-center gap-5 mt-[2rem] w-full justify-between'>
+                                <div className='flex items-center flex-col md:flex-row gap-5 mt-[2rem] w-full justify-between'>
                                     <div className='flex flex-col gap-2 w-full'>
                                         <p className='font-[500] text-gray-500'>Phone</p>
                                         <p className='border border-gray-300 w-full px-2 py-[6px] rounded-[4px]'>{userData.phone}</p>
@@ -160,7 +160,7 @@ const Register = () => {
                                         <p className='border border-gray-300 w-full px-2 py-[6px] rounded-[4px]'>{userData.country}</p>
                                     </div>
                                 </div>
-                                <div className='flex items-center gap-5 mt-[2rem] w-full justify-between'>
+                                <div className='flex items-center flex-col md:flex-row gap-5 mt-[2rem] w-full justify-between'>
                                     <div className='flex gap-2 flex-col w-full'>
                                         <p className='font-[500] text-gray-500'>City</p>
                                         <p className='border border-gray-300 w-full px-2 py-[6px] rounded-[4px]'>{userData.city}</p>
@@ -175,7 +175,7 @@ const Register = () => {
                                     </div>
                                     
                                 </div>
-                                <div className='flex items-center gap-5 mt-[2rem] w-full justify-between'>
+                                <div className='flex items-center flex-col md:flex-row gap-5 mt-[2rem] w-full justify-between'>
                                     <div className='flex gap-2 flex-col w-full'>
                                         <p className='font-[500] text-gray-500'>Address</p>
                                         <p className='border border-gray-300 w-full px-2 py-[6px] rounded-[4px]'>{userData.address}</p>
@@ -189,7 +189,7 @@ const Register = () => {
                             </div>
                             <div className='w-[100%] mx-auto'>
                                 <p className='underline mb-6 mt-[3rem] text-gray-500 font-[600] text-lg'>Education/Work Experience</p>
-                                <div className='flex items-center gap-5 mt-[1.5rem] w-full justify-between'>
+                                <div className='flex items-center flex-col md:flex-row gap-5 mt-[1.5rem] w-full justify-between'>
                                     <div className='flex gap-2 flex-col w-full'>
                                         <p className='font-[500] text-gray-500'>Education Level</p>
                                         <p className='border border-gray-300 w-full px-2 py-[6px] rounded-[4px]'>{userData.educationLevel}</p>
@@ -203,7 +203,7 @@ const Register = () => {
                                         <p className='border border-gray-300 w-full px-2 py-[6px] rounded-[4px]'>{userData.personalReferenceName}</p>
                                     </div>
                                 </div>
-                                <div className='flex items-center gap-5 mt-[2rem] w-full justify-between'>
+                                <div className='flex items-center flex-col md:flex-row gap-5 mt-[2rem] w-full justify-between'>
                                     <div className='flex flex-col gap-2 w-full'>
                                         <p className='font-[500] text-gray-500'>Personal Reference Phone</p>
                                         <p className='border border-gray-300 w-full px-2 py-[6px] rounded-[4px]'>{userData.personalReferencePhone}</p>
@@ -216,7 +216,7 @@ const Register = () => {
                             </div>
                             <div className='w-[100%] mx-auto'>
                                 <p className='underline mb-6 mt-[3rem] text-gray-500 font-[600] text-lg'>Emergency Contact Information</p>
-                                <div className='flex items-center gap-5 mt-[1.5rem] w-full justify-between'>
+                                <div className='flex items-center flex-col md:flex-row gap-5 mt-[1.5rem] w-full justify-between'>
                                     <div className='flex gap-2 flex-col w-full'>
                                         <p className='font-[500] text-gray-500'>Emergency Contact</p>
                                         <p className='border border-gray-300 w-full px-2 py-[6px] rounded-[4px]'>{userData.emergencyContact}</p>
@@ -230,7 +230,7 @@ const Register = () => {
                                         <p className='border border-gray-300 w-full px-2 py-[6px] rounded-[4px]'>{userData.contactPhone}</p>
                                     </div>
                                 </div>
-                                <div className='flex items-center gap-5 mt-[2rem] w-full justify-between'>
+                                <div className='flex items-center flex-col md:flex-row gap-5 mt-[2rem] w-full justify-between'>
                                     <div className='flex flex-col gap-2 w-full'>
                                         <p className='font-[500] text-gray-500'>Convicted</p>
                                         <p className='border border-gray-300 w-full px-2 py-[6px] rounded-[4px]'>{userData.convicted}</p>
@@ -243,7 +243,7 @@ const Register = () => {
                             </div>
                             <div className='w-[100%] mx-auto'>
                                 <p className='underline mb-6 mt-[3rem] text-gray-500 font-[600] text-lg'>Volunteer Position Information</p>
-                                <div className='flex items-center gap-5 mt-[1.5rem] w-full justify-between'>
+                                <div className='flex items-center flex-col md:flex-row gap-5 mt-[1.5rem] w-full justify-between'>
                                     <div className='flex flex-col gap-2 w-full'>
                                         <p className='font-[500] text-gray-500'>Skill</p>
                                         <p className='border border-gray-300 w-full px-2 py-[6px] rounded-[4px]'>{userData.skill}</p>
@@ -253,7 +253,7 @@ const Register = () => {
                                         <p className='border border-gray-300 w-full px-2 py-[6px] rounded-[4px]'>{userData.experience}</p>
                                     </div>
                                 </div>
-                                <div className='flex items-center gap-5 mt-[2rem] w-full justify-between'>
+                                <div className='flex items-center flex-col md:flex-row gap-5 mt-[2rem] w-full justify-between'>
                                     <div className='flex flex-col gap-2 w-full'>
                                         <p className='font-[500] text-gray-500'>Interest</p>
                                         <p className='border border-gray-300 w-full px-2 py-[6px] rounded-[4px]'>{userData.interest}</p>
@@ -265,7 +265,7 @@ const Register = () => {
                                 </div>
                                 <div className='flex gap-2 flex-col w-full mt-[2rem]'>
                                     <p className='font-[500] text-gray-500'>Availability</p>
-                                    <div className='border border-gray-300 w-full px-2 py-[6px] rounded-[4px] flex items-center gap-2'>
+                                    <div className='border border-gray-300 w-full px-2 py-[6px] rounded-[4px] flex flex-col md:flex-row md:items-center gap-2'>
                                         {availability.map(a => (
                                             <p>{a},</p>
                                         ))}
@@ -273,7 +273,7 @@ const Register = () => {
                                 </div>
                                 <div className='flex gap-2 flex-col w-full mt-[2rem]'>
                                     <p className='font-[500] text-gray-500'>Position(s)</p>
-                                    <div className='border border-gray-300 w-full px-2 py-[6px] rounded-[4px] flex items-center gap-2'>
+                                    <div className='border border-gray-300 w-full px-2 py-[6px] rounded-[4px] flex flex-col md:flex-row md:items-center gap-2'>
                                         {position.map(p => (
                                             <p>{p},</p>
                                         ))}
@@ -285,13 +285,13 @@ const Register = () => {
                                     onClick={() => prevStep()}
                                     class="mt-10 tracking-wide font-semibold bg-[#2B91F3] text-gray-100 w-full py-4 rounded-lg hover:bg-[#2b82f3] transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none"
                                 >
-                                    <span class="ml-3">Previous</span>
+                                    <span>Previous</span>
                                 </button>
                                 <button
                                     onClick={() => submitForm()}
                                     class="mt-10 tracking-wide font-semibold bg-[#2B91F3] text-gray-100 w-full py-4 rounded-lg hover:bg-[#2b82f3] transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none"
                                 >
-                                    <span class="ml-3">Next</span>
+                                    <span>Submit</span>
                                 </button>
                             </div>
                         </div>
