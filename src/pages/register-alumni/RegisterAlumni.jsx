@@ -14,18 +14,21 @@ import { BsCalendarCheck } from "react-icons/bs";
 const RegisterAlumni = () => {
 
     const navigate = useNavigate()
-    const [passwordType, setPasswordType] = useState('password')
+    const [searchText, setSeacrhText] = useState('')
     const [hearUsDropDown, setHearUsDropDown] = useState(false)
     const aboutUs = ['Email', 'Linkedin', 'Advert', 'Other']
     const [countryDropDown, setCountryDropDown] = useState(false)
     const [allCountries, setAllCountries] = useState([])
+    const [loader, setLoader] = useState(false)
 
 
     async function getAllCountruies(){
+        setLoader(true)
         const response = await fetch('https://restcountries.com/v3.1/all')
         const data = await response.json()
-        console.log(data)
-        setAllCountries(data)
+        if(response) setLoader(false)
+        console.log(data.sort((a, b) => a.name.common.localeCompare(b.name.common)))
+        setAllCountries(data.sort((a, b) => a.name.common.localeCompare(b.name.common)))
         return data
     }
 
@@ -41,21 +44,21 @@ const RegisterAlumni = () => {
             <div class="flex-1 p-6 sm:p-12">
                 <div>
                     <AiFillHome onClick={()=> navigate("/")} class="text-3xl border border-gray-300 text-gray-300 rounded-full p-1 hover:bg-gray-300 transition-all cursor-pointer hover:text-white"/>
-                    <img src="./images/brand-header.png" className='w-[120px] mx-auto' alt="" />
+                    <img src="./images/brand-header.png" className='sm:w-[120px] w-[60px] mx-auto' alt="" />
                 </div>
                     <form class="mt-6 flex flex-col items-center">
                         <h1 class="text-xl xl:text-2xl font-[700] text-gray-700">
                             Sign up for an account
                         </h1>
                         <div className='flex items-center gap-5 text-gray-500 font-[500] mt-6'>
-                          <button onClick={() => navigate('/register')}>Register as a Volunteer</button>
-                          <button className='text-[#2B91F3] underline'>Register as an Alumni</button>
+                          <button onClick={() => navigate('/register')} className='text-[12px] sm:text-[16px]'>Register as a Volunteer</button>
+                          <button className='text-[#2B91F3] underline text-[12px] sm:text-[16px]'>Register as an Alumni</button>
                         </div>
                         <div class="w-full flex-1 mt-8">
                             <div class="mx-auto ">
                                 <p className='mb-6 underline mt-3 text-gray-500 font-[600] text-lg'>Personal and Contact Information</p>
-                                <div className='flex items-center gap-5'>
-                                    <div className='flex items-center gap-3 border-b border-gray-200 p-1'>
+                                <div className='flex items-center sm:gap-5 flex-col sm:flex-row gap-10'>
+                                    <div className='flex items-center gap-3 border-b border-gray-200 p-1 w-full'>
                                         <LuUser2 className='text-[24px] text-gray-500'/>
                                         <input
                                             class="w-full font-medium placeholder-gray-500 text-md outline-none"
@@ -63,7 +66,7 @@ const RegisterAlumni = () => {
                                             placeholder="First Name"
                                         />
                                     </div>
-                                    <div className='flex items-center gap-3 border-b border-gray-200 p-1'>
+                                    <div className='flex items-center gap-3 border-b border-gray-200 p-1 w-full'>
                                         <LuUser2 className='text-[24px] text-gray-500'/>
                                         <input
                                             class="w-full font-medium placeholder-gray-500 text-md outline-none"
@@ -72,8 +75,8 @@ const RegisterAlumni = () => {
                                         />
                                     </div>
                                 </div>
-                                <div className='flex items-center gap-5 mt-[2.5rem]'>
-                                    <div className='flex items-center gap-3 border-b border-gray-200 p-1'>
+                                <div className='flex items-center sm:gap-5 flex-col sm:flex-row gap-10 mt-[2.5rem]'>
+                                    <div className='flex items-center gap-3 border-b border-gray-200 p-1 w-full'>
                                         <FiMail className='text-[24px] text-gray-500'/>
                                         <input
                                             class="w-full font-medium placeholder-gray-500 text-md outline-none"
@@ -81,7 +84,7 @@ const RegisterAlumni = () => {
                                             placeholder="Email"
                                         />
                                     </div>
-                                    <div className='flex items-center gap-3 border-b border-gray-200 p-1'>
+                                    <div className='flex items-center gap-3 border-b border-gray-200 p-1 w-full'>
                                         <FiPhone className='text-[24px] text-gray-500'/>
                                         <input
                                             class="w-full font-medium placeholder-gray-500 text-md outline-none"
@@ -91,9 +94,9 @@ const RegisterAlumni = () => {
                                     </div>
                                 </div>
                                 <p className='mb-6 underline mt-[4.5rem] text-gray-500 font-[600] text-lg'>Residential Information</p>
-                                <div className='flex items-center gap-5'>
-                                    <div className='flex items-center gap-3 border-b border-gray-200 p-1 relative'>
-                                        <div className='flex items-center gap-3'>
+                                <div className='flex items-center sm:gap-5 flex-col sm:flex-row gap-10'>
+                                    <div className='flex items-center gap-3 border-b border-gray-200 p-1 relative w-full'>
+                                        <div className='flex items-center gap-3 w-full'>
                                             <FiFlag className='text-[24px] text-gray-500'/>
                                             <input
                                                 class="w-full font-medium placeholder-gray-500 text-md outline-none"
@@ -104,18 +107,36 @@ const RegisterAlumni = () => {
                                         <IoChevronDown className='text-[24px] text-gray-500 cursor-pointer' onClick={() => setCountryDropDown(!countryDropDown)}/>
                                         {
                                             countryDropDown &&
-                                            <div className='bg-white w-full absolute top-[45px] rounded-[4px] h-[350px] overflow-x-hidden overflow-y-scroll left-0 border'>
-                                                {
-                                                    allCountries.map(country => (
-                                                        <p className='text-[14px] text-gray-500 hover:bg-gray-300 cursor-pointer p-[5px]' onClick={() => {
-                                                            setCountryDropDown(!countryDropDown)
-                                                        }}>{country.name.common}</p>
-                                                    ))
-                                                }
+                                            <div className='bg-white w-full absolute top-[45px] rounded-[4px] border border-gray-300 h-[350px] overflow-x-hidden overflow-y-scroll left-0 px-2 py-3'>
+                                                <input type="text" onChange={e => setSeacrhText(e.target.value)} placeholder='Search Country' className='border border-gray-300 w-full placeholder:text-[13px] text-[13px] outline-none px-[4px] rounded mb-1 py-[5px]'/>
+                                                <div>
+                                                    {
+                                                        loader ?
+                                                        <div className='flex items-center justify-center flex-col gap-3 mt-[7rem]'>
+                                                            <FiLoader className='text-[28px] animate-spin'/>
+                                                            <p className='text-gray-500 text-[14px]'>Fetching Countries Please Wait...</p>
+                                                        </div>
+                                                        :
+                                                        <>
+                                                        {
+                                                            allCountries.filter(country => country.name.common.toLowerCase().includes(searchText.toLowerCase()))
+                                                            .map((country) => (
+                                                                <div className='flex items-center gap-2 hover:bg-gray-300 cursor-pointer p-[5px] text-[14px] text-gray-500'onClick={() => {
+                                                                    setCountryDropDown(!countryDropDown)
+                                                                    setCountry(country.name.common)
+                                                                }}>
+                                                                    <img src={country.flags.svg} className=' w-[30px]' alt="" />
+                                                                    <p>{country.name.common}</p>
+                                                                </div>
+                                                            ))
+                                                        }
+                                                        </>
+                                                    }
+                                                </div>
                                             </div>
                                         }
                                     </div>
-                                    <div className='flex items-center gap-3 border-b border-gray-200 p-1'>
+                                    <div className='flex items-center gap-3 border-b border-gray-200 p-1 w-full'>
                                         <FiFlag className='text-[24px] text-gray-500'/>
                                         <input
                                             class="w-full font-medium placeholder-gray-500 text-md outline-none"
@@ -124,8 +145,8 @@ const RegisterAlumni = () => {
                                         />
                                     </div>
                                 </div>
-                                <div className='flex items-center gap-5 mt-[2.5rem]'>
-                                    <div className='flex items-center gap-3 border-b border-gray-200 p-1'>
+                                <div className='flex items-center sm:gap-5 flex-col sm:flex-row gap-10 mt-[2.5rem]'>
+                                    <div className='flex items-center gap-3 border-b border-gray-200 p-1 w-full'>
                                         <PiCity className='text-[24px] text-gray-500'/>
                                         <input
                                             class="w-full font-medium placeholder-gray-500 text-md outline-none"
@@ -133,7 +154,7 @@ const RegisterAlumni = () => {
                                             placeholder="City"
                                         />
                                     </div>
-                                    <div className='flex items-center gap-3 border-b border-gray-200 p-1'>
+                                    <div className='flex items-center gap-3 border-b border-gray-200 p-1 w-full'>
                                         <FaRegAddressBook className='text-[24px] text-gray-500'/>
                                         <input
                                             class="w-full font-medium placeholder-gray-500 text-md outline-none"
@@ -142,8 +163,8 @@ const RegisterAlumni = () => {
                                         />
                                     </div>
                                 </div>
-                                <div className='flex items-center gap-5 mt-[2.5rem]'>
-                                    <div className='flex items-center gap-3 border-b border-gray-200 p-1'>
+                                <div className='flex items-center sm:gap-5 flex-col sm:flex-row gap-10 mt-[2.5rem]'>
+                                    <div className='flex items-center gap-3 border-b border-gray-200 p-1 w-full'>
                                         <FiHome className='text-[24px] text-gray-500'/>
                                         <input
                                             class="w-full font-medium placeholder-gray-500 text-md outline-none"
@@ -151,7 +172,7 @@ const RegisterAlumni = () => {
                                             placeholder="Branch"
                                         />
                                     </div>
-                                    <div className='flex items-center gap-3 border-b border-gray-200 p-1'>
+                                    <div className='flex items-center gap-3 border-b border-gray-200 p-1 w-full'>
                                         <FiHome className='text-[24px] text-gray-500'/>
                                         <input
                                             class="w-full font-medium placeholder-gray-500 text-md outline-none"
@@ -162,8 +183,8 @@ const RegisterAlumni = () => {
                                 </div>
 
                                 <p className='mb-6 underline mt-[4.5rem] text-gray-500 font-[600] text-lg'>Other Information</p>
-                                <div className='flex items-center gap-5'>
-                                    <div className='flex items-center gap-3 border-b border-gray-200 p-1'>
+                                <div className='flex items-center sm:gap-5 flex-col sm:flex-row gap-10'>
+                                    <div className='flex items-center gap-3 border-b border-gray-200 p-1 w-full'>
                                         <BsCalendarCheck className='text-[24px] text-gray-500'/>
                                         <input
                                             class="w-full font-medium placeholder-gray-500 text-md outline-none"
@@ -171,7 +192,7 @@ const RegisterAlumni = () => {
                                             placeholder="Year Training Completed"
                                         />
                                     </div>
-                                    <div className='flex items-center gap-3 border-b border-gray-200 p-1 relative'>
+                                    <div className='flex items-center gap-3 border-b border-gray-200 p-1 relative w-full'>
                                         <input
                                             class="w-full font-medium placeholder-gray-500 text-md outline-none placeholder:text-[11px]"
                                             type="text"
