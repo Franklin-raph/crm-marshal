@@ -21,13 +21,14 @@ const StepOne = ({nextStep, country, userData, setAddress, setCity, setCountry, 
     const [allCountries, setAllCountries] = useState([])
     const [msg, setMsg] = useState('')
     const [alertType, setAlertType] = useState()
+    const [searchText, setSeacrhText] = useState('')
 
 
     async function getAllCountruies(){
         const response = await fetch('https://restcountries.com/v3.1/all')
         const data = await response.json()
-        console.log(data)
-        setAllCountries(data)
+        console.log(data.sort((a, b) => a.name.common.localeCompare(b.name.common)))
+        setAllCountries(data.sort((a, b) => a.name.common.localeCompare(b.name.common)))
         return data
     }
 
@@ -70,7 +71,7 @@ const StepOne = ({nextStep, country, userData, setAddress, setCity, setCountry, 
                             <div class="mx-auto ">
                                 <p className='mb-6 underline mt-3 text-gray-500 font-[600] text-lg'>Personal and Contact Information</p>
                                 <div className='flex items-center gap-5'>
-                                    <div className='flex items-center gap-3 border-b border-gray-200 p-1'>
+                                    <div className='flex items-center gap-3 border-b border-gray-200 p-1  w-full'>
                                         <LuUser2 className='text-[24px] text-gray-500'/>
                                         <input
                                             class="w-full font-medium placeholder-gray-500 text-md outline-none"
@@ -80,7 +81,7 @@ const StepOne = ({nextStep, country, userData, setAddress, setCity, setCountry, 
                                             value={userData.firstName}
                                         />
                                     </div>
-                                    <div className='flex items-center gap-3 border-b border-gray-200 p-1'>
+                                    <div className='flex items-center gap-3 border-b border-gray-200 p-1 w-full'>
                                         <LuUser2 className='text-[24px] text-gray-500'/>
                                         <input
                                             class="w-full font-medium placeholder-gray-500 text-md outline-none"
@@ -92,7 +93,7 @@ const StepOne = ({nextStep, country, userData, setAddress, setCity, setCountry, 
                                     </div>
                                 </div>
                                 <div className='flex items-center gap-5 mt-[2.5rem]'>
-                                    <div className='flex items-center gap-3 border-b border-gray-200 p-1'>
+                                    <div className='flex items-center gap-3 border-b border-gray-200 p-1 w-full'>
                                         <FiMail className='text-[24px] text-gray-500'/>
                                         <input
                                             class="w-full font-medium placeholder-gray-500 text-md outline-none"
@@ -102,7 +103,7 @@ const StepOne = ({nextStep, country, userData, setAddress, setCity, setCountry, 
                                             value={userData.email}
                                         />
                                     </div>
-                                    <div className='flex items-center gap-3 border-b border-gray-200 p-1'>
+                                    <div className='flex items-center gap-3 border-b border-gray-200 p-1 w-full'>
                                         <FiPhone className='text-[24px] text-gray-500'/>
                                         <input
                                             class="w-full font-medium placeholder-gray-500 text-md outline-none"
@@ -128,7 +129,7 @@ const StepOne = ({nextStep, country, userData, setAddress, setCity, setCountry, 
                                 </div>
                                 <p className='mb-6 underline mt-[4.5rem] text-gray-500 font-[600] text-lg'>Residential Information</p>
                                 <div className='flex items-center gap-5'>
-                                    <div className='flex items-center gap-3 border-b border-gray-200 p-1 relative'>
+                                    <div className='flex items-center gap-3 border-b border-gray-200 p-1 relative w-full'>
                                         <div className='flex items-center gap-3'>
                                             <FiFlag className='text-[24px] text-gray-500'/>
                                             <input
@@ -141,19 +142,24 @@ const StepOne = ({nextStep, country, userData, setAddress, setCity, setCountry, 
                                         <IoChevronDown className='text-[24px] text-gray-500 cursor-pointer' onClick={() => setCountryDropDown(!countryDropDown)}/>
                                         {
                                             countryDropDown &&
-                                            <div className='bg-white w-full absolute top-[45px] rounded-[4px] h-[350px] overflow-x-hidden overflow-y-scroll left-0 border'>
+                                            <div className='bg-white w-full absolute top-[45px] rounded-[4px] border border-gray-500 h-[350px] overflow-x-hidden overflow-y-scroll left-0'>
+                                                <input type="text" onChange={e => setSeacrhText(e.target.value)} placeholder='Search Country' className='border border-gray-500 w-full m-2 placeholder:text-[13px] text-[13px] outline-none px-[2px] py-[2px]'/>
                                                 {
-                                                    allCountries.map(country => (
-                                                        <p className='text-[14px] text-gray-500 hover:bg-gray-300 cursor-pointer p-[5px]' onClick={() => {
+                                                    allCountries.filter(country => country.name.common.toLowerCase().includes(searchText.toLowerCase()))
+                                                    .map((country) => (
+                                                        <div className='flex items-center gap-2 hover:bg-gray-300 cursor-pointer p-[5px] text-[14px] text-gray-500'onClick={() => {
                                                             setCountryDropDown(!countryDropDown)
                                                             setCountry(country.name.common)
-                                                        }}>{country.name.common}</p>
+                                                        }}>
+                                                            <img src={country.flags.svg} className=' w-[30px]' alt="" />
+                                                            <p>{country.name.common}</p>
+                                                        </div>
                                                     ))
                                                 }
                                             </div>
                                         }
                                     </div>
-                                    <div className='flex items-center gap-3 border-b border-gray-200 p-1'>
+                                    <div className='flex items-center gap-3 border-b border-gray-200 p-1 w-full'>
                                         <FiFlag className='text-[24px] text-gray-500'/>
                                         <input
                                             class="w-full font-medium placeholder-gray-500 text-md outline-none"
@@ -165,7 +171,7 @@ const StepOne = ({nextStep, country, userData, setAddress, setCity, setCountry, 
                                     </div>
                                 </div>
                                 <div className='flex items-center gap-5 mt-[2.5rem]'>
-                                    <div className='flex items-center gap-3 border-b border-gray-200 p-1'>
+                                    <div className='flex items-center gap-3 border-b border-gray-200 p-1 w-full'>
                                         <PiCity className='text-[24px] text-gray-500'/>
                                         <input
                                             class="w-full font-medium placeholder-gray-500 text-md outline-none"
@@ -175,7 +181,7 @@ const StepOne = ({nextStep, country, userData, setAddress, setCity, setCountry, 
                                             value={userData.city}
                                         />
                                     </div>
-                                    <div className='flex items-center gap-3 border-b border-gray-200 p-1'>
+                                    <div className='flex items-center gap-3 border-b border-gray-200 p-1 w-full'>
                                         <FaRegAddressBook className='text-[24px] text-gray-500'/>
                                         <input
                                             class="w-full font-medium placeholder-gray-500 text-md outline-none"
@@ -187,7 +193,7 @@ const StepOne = ({nextStep, country, userData, setAddress, setCity, setCountry, 
                                     </div>
                                 </div>
                                 <div className='flex items-center gap-5 mt-[2.5rem]'>
-                                    <div className='flex items-center gap-3 border-b border-gray-200 p-1'>
+                                    <div className='flex items-center gap-3 border-b border-gray-200 p-1 w-full'>
                                         <MdDriveEta className='text-[24px] text-gray-500'/>
                                         <input
                                             class="w-full font-medium placeholder-gray-500 text-md outline-none"
@@ -197,7 +203,7 @@ const StepOne = ({nextStep, country, userData, setAddress, setCity, setCountry, 
                                             value={userData.drivingLicense}
                                         />
                                     </div>
-                                    <div className='flex items-center gap-3 border-b border-gray-200 p-1'>
+                                    <div className='flex items-center gap-3 border-b border-gray-200 p-1 w-full'>
                                         <FiHome className='text-[24px] text-gray-500'/>
                                         <input
                                             class="w-full font-medium placeholder-gray-500 text-md outline-none"

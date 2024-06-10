@@ -39,7 +39,7 @@ const Login = () => {
                                 </div>
                                 <div className='flex items-center gap-3 border-b border-gray-200 p-1 mt-[2rem]'>
                                     <GoShieldCheck className='text-[24px] text-gray-500'/>
-                                    <div className='flex items-center justify-between'>
+                                    <div className='flex items-center justify-between w-full'>
                                         <input
                                             class="w-full font-medium placeholder-gray-500 text-md outline-none"
                                             type={passwordType}

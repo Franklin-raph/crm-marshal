@@ -267,7 +267,7 @@ const Register = () => {
                                     <p className='font-[500] text-gray-500'>Availability</p>
                                     <div className='border border-gray-300 w-full px-2 py-[6px] rounded-[4px] flex items-center gap-2'>
                                         {availability.map(a => (
-                                            <p>{a}</p>
+                                            <p>{a},</p>
                                         ))}
                                     </div>
                                 </div>
@@ -275,7 +275,7 @@ const Register = () => {
                                     <p className='font-[500] text-gray-500'>Position(s)</p>
                                     <div className='border border-gray-300 w-full px-2 py-[6px] rounded-[4px] flex items-center gap-2'>
                                         {position.map(p => (
-                                            <p>{p}</p>
+                                            <p>{p},</p>
                                         ))}
                                     </div>
                                 </div>
@@ -320,17 +320,17 @@ const Register = () => {
                             </div>
                             <div className='h-[100px] w-[4px] bg-gray-400 ml-[10px]'></div>
                             <div className='flex items-center gap-2'>
-                                <div className='p-3 rounded-full bg-white inline-flex'></div>
+                                <div className='p-3 rounded-full bg-gray-400 inline-flex'></div>
                                 <p className='font-[600] drop-shadow-xl'>Emergency Contact Information</p>
                             </div>
-                            <div className='h-[100px] w-[4px] bg-white ml-[10px]'></div>
+                            <div className='h-[100px] w-[4px] bg-gray-400 ml-[10px]'></div>
                             <div className='flex items-center gap-2'>
-                                <div className='p-3 rounded-full bg-white inline-flex'></div>
+                                <div className='p-3 rounded-full bg-gray-400 inline-flex'></div>
                                 <p className='font-[600] drop-shadow-xl'>Volunteer Position Information</p>
                             </div>
-                            <div className='h-[100px] w-[4px] bg-white ml-[10px]'></div>
+                            <div className='h-[100px] w-[4px] bg-gray-400 ml-[10px]'></div>
                             <div className='flex items-center gap-2'>
-                                <div className='p-3 rounded-full bg-white inline-flex'></div>
+                                <div className='p-3 rounded-full bg-gray-400 inline-flex'></div>
                                 <p className='font-[600] drop-shadow-xl'>Profile Preview</p>
                             </div>
                         </div>
