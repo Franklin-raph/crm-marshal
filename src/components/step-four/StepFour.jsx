@@ -75,6 +75,28 @@ const StepFour = ({nextStep, prevStep, userData, setPosition, setSkill, setExper
                         <button className='text-[#2B91F3] underline text-[12px] sm:text-[16px]'>Register as a Volunteer</button>
                         <button onClick={() => navigate('/register-alumni')} className='text-[12px] sm:text-[16px]'>Register as an Alumni</button>
                     </div>
+                    <div className='lg:hidden flex items-center justify-center w-full mt-[2rem]'>
+                        <div className='px-2 border bg-[#2B91F3] rounded-full flex items-center text-white'>
+                            <p>1</p>
+                        </div>
+                        <div className='h-[2px] w-[10%] bg-[#2B91F3]'></div>
+                        
+                        <div className='text-white px-2 border bg-[#2B91F3] rounded-full flex items-center'>
+                            <p>2</p>
+                        </div>
+                        <div className='h-[2px] w-[10%] bg-[#2B91F3]'></div>
+                        <div className='text-white px-2 border bg-[#2B91F3] rounded-full flex items-center'>
+                            <p>3</p>
+                        </div>
+                        <div className='h-[2px] w-[10%] bg-[#2B91F3]'></div>
+                        <div className='text-white px-2 bg-[#2B91F3] rounded-full flex items-center'>
+                            <p>4</p>
+                        </div>
+                        <div className='h-[2px] w-[10%] bg-[#2B91F3]'></div>
+                        <div className='text-gray-500 px-2 border border-gray-300 rounded-full flex items-center'>
+                            <p>5</p>
+                        </div>
+                    </div>
                     <div class="w-full flex-1 mt-8">
                         <div class="mx-auto ">
                             <p className='mb-6 underline mt-3 text-gray-500 font-[600] text-lg'>Volunteer Position Information</p>
