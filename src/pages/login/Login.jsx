@@ -4,6 +4,7 @@ import { GoShieldCheck } from "react-icons/go";
 import { LuUser2 } from "react-icons/lu";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa6";
 import { AiFillHome } from "react-icons/ai";
+import Alert from '../../components/alert/Alert';
 
 
 
@@ -12,10 +13,20 @@ const Login = () => {
 
     const navigate = useNavigate()
     const [passwordType, setPasswordType] = useState('password')
+    const [userName, setUserName] = useState('')
+    const [password, setPassword] = useState('')
+    const [msg, setMsg] = useState('')
+    const [alertType, setAlertType] = useState()
 
     function handleSignIn(e){
         e.preventDefault()
-        navigate('/register')
+        if(!userName || !password){
+            setMsg("Please Fill in all fields");
+            setAlertType('error');
+            return
+        }else{
+            navigate('/dashboard')
+        }
     }
 
   return (
@@ -26,20 +37,21 @@ const Login = () => {
             <div class="lg:w-1/2 xl:w-5/12 p-6 sm:p-12">
                 <div>
                     <AiFillHome onClick={()=> navigate("/")} class="text-3xl border border-gray-300 text-gray-300 rounded-full p-1 hover:bg-gray-300 transition-all cursor-pointer hover:text-white"/>
-                    <img src="./images/brand-header.png" className='w-[120px] mx-auto' alt="" />
+                    <img src="./images/brand-header.png" className='sm:w-[120px] w-[60px] mx-auto' alt="" />
                 </div>
                     <form onSubmit={handleSignIn} class="mt-12 flex flex-col items-center">
                         <h1 class="text-xl xl:text-2xl font-[700] text-gray-700">
                             Sign in to your account
                         </h1>
                         <div class="w-full flex-1 mt-8">
-                            <div class="mx-auto max-w-xs">
+                            <div class="mx-auto md:max-w-xs">
                                 <div className='flex items-center gap-3 border-b border-gray-200 p-1 mt-4'>
                                     <LuUser2 className='text-[24px] text-gray-500'/>
                                     <input
                                         class="w-full font-medium placeholder-gray-500 text-md outline-none"
                                         type="text"
                                         placeholder="Username"
+                                        onChange={e => setUserName(e.target.value)}
                                     />
                                 </div>
                                 <div className='flex items-center gap-3 border-b border-gray-200 p-1 mt-[2rem]'>
@@ -49,6 +61,7 @@ const Login = () => {
                                             class="w-full font-medium placeholder-gray-500 text-md outline-none"
                                             type={passwordType}
                                             placeholder="Password"
+                                            onChange={e => setPassword(e.target.value)}
                                         />
                                         {
                                             passwordType === 'password' &&
@@ -90,6 +103,9 @@ const Login = () => {
                 {/* <img src="https://storage.googleapis.com/devitary-image-host.appspot.com/15848031292911696601-undraw_designer_life_w96d.svg" alt="" /> */}
             </div>
         </div>
+        {
+          msg && <Alert msg={msg} setMsg={setMsg} alertType={alertType}/>
+        }
     </div>
   )
 }
