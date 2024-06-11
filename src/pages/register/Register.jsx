@@ -14,7 +14,7 @@ import Alert from '../../components/alert/Alert';
 const Register = () => {
 
     const navigate = useNavigate()
-    const [isChecked, setIsChecked] = useState()
+    const [isChecked, setIsChecked] = useState(false)
 
     // STEP 1 DETAILS
     const [firstName, setFirstName] = useState('')
@@ -73,10 +73,6 @@ const Register = () => {
     function prevStep() {
         setFormStep(formStep - 1)
     }
-
-    const handleCheckboxChange = (event) => {
-        setIsChecked(event.target.checked);
-    };
 
     async function submitForm(){
         console.log(isChecked);

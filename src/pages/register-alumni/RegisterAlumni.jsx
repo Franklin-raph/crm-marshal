@@ -4,7 +4,7 @@ import { GoShieldCheck } from "react-icons/go";
 import { LuUser2 } from "react-icons/lu";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa6";
 import { AiFillHome } from 'react-icons/ai';
-import { FiFlag, FiHome, FiMail , FiPhone} from "react-icons/fi";
+import { FiFlag, FiHome, FiLoader, FiMail , FiPhone} from "react-icons/fi";
 import { PiCity } from "react-icons/pi";
 import { FaRegAddressBook } from "react-icons/fa";
 import { IoChevronDown } from "react-icons/io5";
@@ -20,19 +20,35 @@ const RegisterAlumni = () => {
     const [countryDropDown, setCountryDropDown] = useState(false)
     const [allCountries, setAllCountries] = useState([])
     const [loader, setLoader] = useState(false)
+    const [country, setCountry] = useState('')
 
+
+    // async function getAllCountruies(){
+    //     setLoader(true)
+    //     const response = await fetch('https://restcountries.com/v3.1/all')
+    //     const data = await response.json()
+    //     if(response) setLoader(false)
+    //     console.log(data.sort((a, b) => a.name.common.localeCompare(b.name.common)))
+    //     setAllCountries(data.sort((a, b) => a.name.common.localeCompare(b.name.common)))
+    //     return data
+    // }
 
     async function getAllCountruies(){
         setLoader(true)
-        const response = await fetch('https://restcountries.com/v3.1/all')
+        const response = await fetch('https://api.countrystatecity.in/v1/countries',{
+            headers :{
+                'X-CSCAPI-KEY':'VUJ1UU5aSmlLU2xiNEJxdUg0RnQ0akNZbXAyV2ZiVHlnN1F6dHA1dg=='
+            }
+        })
         const data = await response.json()
         if(response) setLoader(false)
-        console.log(data.sort((a, b) => a.name.common.localeCompare(b.name.common)))
-        setAllCountries(data.sort((a, b) => a.name.common.localeCompare(b.name.common)))
+        console.log(data);
+        setAllCountries(data)
         return data
     }
 
     useEffect(() => {
+        // getAllCountruies()
         getAllCountruies()
     },[])
 
@@ -119,14 +135,14 @@ const RegisterAlumni = () => {
                                                         :
                                                         <>
                                                         {
-                                                            allCountries.filter(country => country.name.common.toLowerCase().includes(searchText.toLowerCase()))
+                                                            allCountries.filter(country => country.name.toLowerCase().includes(searchText.toLowerCase()))
                                                             .map((country) => (
                                                                 <div className='flex items-center gap-2 hover:bg-gray-300 cursor-pointer p-[5px] text-[14px] text-gray-500'onClick={() => {
                                                                     setCountryDropDown(!countryDropDown)
-                                                                    setCountry(country.name.common)
+                                                                    setCountry(country.name)
                                                                 }}>
-                                                                    <img src={country.flags.svg} className=' w-[30px]' alt="" />
-                                                                    <p>{country.name.common}</p>
+                                                                    <p>{country.emoji}</p>
+                                                                    <p>{country.name}</p>
                                                                 </div>
                                                             ))
                                                         }

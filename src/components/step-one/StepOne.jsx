@@ -16,7 +16,7 @@ import { FiLoader } from "react-icons/fi";
 import "flatpickr/dist/themes/material_green.css";
 import Alert from '../alert/Alert';
 
-const StepOne = ({nextStep, country, userData, setAddress, setCity, setCountry, setLastName, setFirstName, setEmail, setPhone, setDob, setDrivingLicense, setState, setZip}) => {
+const StepOne = ({nextStep, userData, setAddress, setCity, setCountry, setLastName, setFirstName, setEmail, setPhone, setDob, setDrivingLicense, setState, setZip}) => {
 
     const navigate = useNavigate()
     const [countryDropDown, setCountryDropDown] = useState(false)
@@ -25,15 +25,53 @@ const StepOne = ({nextStep, country, userData, setAddress, setCity, setCountry, 
     const [alertType, setAlertType] = useState()
     const [searchText, setSeacrhText] = useState('')
     const [loader, setLoader] = useState(false)
+    const [allSates, setAllStates] = useState([])
+    const [stateDropDown, setStateDropDown] = useState(false)
+    const [allCities, setAllCities] = useState([])
+    const [cityDropDown, setCityDropDown] = useState(false)
+
+    const [countryIso, setCountryIso] = useState('')
 
 
     async function getAllCountruies(){
         setLoader(true)
-        const response = await fetch('https://restcountries.com/v3.1/all')
+        const response = await fetch('https://api.countrystatecity.in/v1/countries',{
+            headers :{
+                'X-CSCAPI-KEY':'VUJ1UU5aSmlLU2xiNEJxdUg0RnQ0akNZbXAyV2ZiVHlnN1F6dHA1dg=='
+            }
+        })
         const data = await response.json()
         if(response) setLoader(false)
-        console.log(data.sort((a, b) => a.name.common.localeCompare(b.name.common)))
-        setAllCountries(data.sort((a, b) => a.name.common.localeCompare(b.name.common)))
+        console.log(data);
+        setAllCountries(data)
+        return data
+    }
+
+    async function getStates(iso2){
+        setLoader(true)
+        const response = await fetch(`https://api.countrystatecity.in/v1/countries/${iso2}/states`,{
+            headers :{
+                'X-CSCAPI-KEY':'VUJ1UU5aSmlLU2xiNEJxdUg0RnQ0akNZbXAyV2ZiVHlnN1F6dHA1dg=='
+            }
+        })
+        const data = await response.json()
+        if(response) setLoader(false)
+        console.log(data.sort((a, b) => a.name.localeCompare(b.name)));
+        setAllStates(data.sort((a, b) => a.name.localeCompare(b.name)))
+        return data
+    }
+
+    async function getCities(iso2){
+        setLoader(true)
+        const response = await fetch(`https://api.countrystatecity.in/v1/countries/${countryIso}/states/${iso2}/cities`,{
+            headers :{
+                'X-CSCAPI-KEY':'VUJ1UU5aSmlLU2xiNEJxdUg0RnQ0akNZbXAyV2ZiVHlnN1F6dHA1dg=='
+            }
+        })
+        const data = await response.json()
+        if(response) setLoader(false)
+        console.log(data.sort((a, b) => a.name.localeCompare(b.name)));
+        setAllCities(data.sort((a, b) => a.name.localeCompare(b.name)))
         return data
     }
 
@@ -169,10 +207,10 @@ const StepOne = ({nextStep, country, userData, setAddress, setCity, setCountry, 
                                         <IoChevronDown className='text-[24px] text-gray-500 cursor-pointer' onClick={() => setCountryDropDown(!countryDropDown)}/>
                                         {
                                             countryDropDown &&
-                                            <div className='bg-white w-full absolute top-[45px] rounded-[4px] border border-gray-300 h-[350px] overflow-x-hidden overflow-y-scroll left-0 px-2 py-3'>
+                                            <div className='bg-white w-full absolute z-[11] top-[45px] rounded-[4px] border border-gray-300 h-[350px] overflow-x-hidden overflow-y-scroll left-0 px-2 py-3'>
                                                 <input type="text" onChange={e => setSeacrhText(e.target.value)} placeholder='Search Country' className='border border-gray-300 w-full placeholder:text-[13px] text-[13px] outline-none px-[4px] rounded mb-1 py-[5px]'/>
                                                 <div>
-                                                    {
+                                                {
                                                         loader ?
                                                         <div className='flex items-center justify-center flex-col gap-3 mt-[7rem]'>
                                                             <FiLoader className='text-[28px] animate-spin'/>
@@ -181,14 +219,16 @@ const StepOne = ({nextStep, country, userData, setAddress, setCity, setCountry, 
                                                         :
                                                         <>
                                                         {
-                                                            allCountries.filter(country => country.name.common.toLowerCase().includes(searchText.toLowerCase()))
+                                                            allCountries.filter(country => country.name.toLowerCase().includes(searchText.toLowerCase()))
                                                             .map((country) => (
                                                                 <div className='flex items-center gap-2 hover:bg-gray-300 cursor-pointer p-[5px] text-[14px] text-gray-500'onClick={() => {
                                                                     setCountryDropDown(!countryDropDown)
-                                                                    setCountry(country.name.common)
+                                                                    setCountry(country.name)
+                                                                    getStates(country.iso2)
+                                                                    setCountryIso(country.iso2)
                                                                 }}>
-                                                                    <img src={country.flags.svg} className=' w-[30px]' alt="" />
-                                                                    <p>{country.name.common}</p>
+                                                                    <p>{country.emoji}</p>
+                                                                    <p>{country.name}</p>
                                                                 </div>
                                                             ))
                                                         }
@@ -198,7 +238,49 @@ const StepOne = ({nextStep, country, userData, setAddress, setCity, setCountry, 
                                             </div>
                                         }
                                     </div>
-                                    <div className='flex items-center gap-3 border-b border-gray-200 p-1 w-full'>
+                                    <div className='flex items-center gap-3 border-b border-gray-200 p-1 relative w-full'>
+                                        <div className='flex items-center gap-3 w-full'>
+                                            <FiFlag className='text-[24px] text-gray-500'/>
+                                            <input
+                                                class="w-full font-medium placeholder-gray-500 text-md outline-none"
+                                                type="text"
+                                                placeholder="State"
+                                                value={userData.state}
+                                            />
+                                        </div>
+                                        <IoChevronDown className='text-[24px] text-gray-500 cursor-pointer' onClick={() => setStateDropDown(!stateDropDown)}/>
+                                        {
+                                            stateDropDown &&
+                                            <div className='bg-white w-full absolute z-[12] top-[45px] rounded-[4px] border border-gray-300 h-[350px] overflow-x-hidden overflow-y-scroll left-0 px-2 py-3'>
+                                                <input type="text" onChange={e => setSeacrhText(e.target.value)} placeholder='Search Country' className='border border-gray-300 w-full placeholder:text-[13px] text-[13px] outline-none px-[4px] rounded mb-1 py-[5px]'/>
+                                                <div>
+                                                {
+                                                        loader ?
+                                                        <div className='flex items-center justify-center flex-col gap-3 mt-[7rem]'>
+                                                            <FiLoader className='text-[28px] animate-spin'/>
+                                                            <p className='text-gray-500 text-[14px]'>Fetching States Please Wait...</p>
+                                                        </div>
+                                                        :
+                                                        <>
+                                                        {
+                                                            allSates.filter(state => state.name.toLowerCase().includes(searchText.toLowerCase()))
+                                                            .map((state) => (
+                                                                <div className='flex items-center gap-2 hover:bg-gray-300 cursor-pointer p-[5px] text-[14px] text-gray-500'onClick={() => {
+                                                                    setStateDropDown(!stateDropDown)
+                                                                    setState(state.name)
+                                                                    getCities(state.iso2)
+                                                                }}>
+                                                                    <p>{state.name}</p>
+                                                                </div>
+                                                            ))
+                                                        }
+                                                        </>
+                                                    }
+                                                </div>
+                                            </div>
+                                        }
+                                    </div>
+                                    {/* <div className='flex items-center gap-3 border-b border-gray-200 p-1 w-full'>
                                         <FiFlag className='text-[24px] text-gray-500'/>
                                         <input
                                             class="w-full font-medium placeholder-gray-500 text-md outline-none"
@@ -207,18 +289,49 @@ const StepOne = ({nextStep, country, userData, setAddress, setCity, setCountry, 
                                             onChange={(e) => setState(e.target.value)}
                                             value={userData.state}
                                         />
-                                    </div>
+                                    </div> */}
                                 </div>
                                 <div className='flex items-center sm:gap-5 flex-col sm:flex-row gap-10 mt-[2.5rem]'>
-                                    <div className='flex items-center gap-3 border-b border-gray-200 p-1 w-full'>
-                                        <PiCity className='text-[24px] text-gray-500'/>
-                                        <input
-                                            class="w-full font-medium placeholder-gray-500 text-md outline-none"
-                                            type="text"
-                                            placeholder="City"
-                                            onChange={(e) => setCity(e.target.value)}
-                                            value={userData.city}
-                                        />
+                                    <div className='flex items-center gap-3 border-b border-gray-200 p-1 relative w-full'>
+                                        <div className='flex items-center gap-3 w-full'>
+                                            <PiCity className='text-[24px] text-gray-500'/>
+                                            <input
+                                                class="w-full font-medium placeholder-gray-500 text-md outline-none"
+                                                type="text"
+                                                placeholder="City"
+                                                value={userData.city}
+                                            />
+                                        </div>
+                                        <IoChevronDown className='text-[24px] text-gray-500 cursor-pointer' onClick={() => setCityDropDown(!cityDropDown)}/>
+                                        {
+                                            cityDropDown &&
+                                            <div className='bg-white w-full absolute top-[45px] rounded-[4px] border border-gray-300 h-[350px] overflow-x-hidden overflow-y-scroll left-0 px-2 py-3'>
+                                                <input type="text" onChange={e => setSeacrhText(e.target.value)} placeholder='Search Country' className='border border-gray-300 w-full placeholder:text-[13px] text-[13px] outline-none px-[4px] rounded mb-1 py-[5px]'/>
+                                                <div>
+                                                {
+                                                        loader ?
+                                                        <div className='flex items-center justify-center flex-col gap-3 mt-[7rem]'>
+                                                            <FiLoader className='text-[28px] animate-spin'/>
+                                                            <p className='text-gray-500 text-[14px]'>Fetching Cities Please Wait...</p>
+                                                        </div>
+                                                        :
+                                                        <>
+                                                        {
+                                                            allCities.filter(city => city.name.toLowerCase().includes(searchText.toLowerCase()))
+                                                            .map((city) => (
+                                                                <div className='flex items-center gap-2 hover:bg-gray-300 cursor-pointer p-[5px] text-[14px] text-gray-500'onClick={() => {
+                                                                    setCityDropDown(!cityDropDown)
+                                                                    setCity(city.name)
+                                                                }}>
+                                                                    <p>{city.name}</p>
+                                                                </div>
+                                                            ))
+                                                        }
+                                                        </>
+                                                    }
+                                                </div>
+                                            </div>
+                                        }
                                     </div>
                                     <div className='flex items-center gap-3 border-b border-gray-200 p-1 w-full'>
                                         <FaRegAddressBook className='text-[24px] text-gray-500'/>
