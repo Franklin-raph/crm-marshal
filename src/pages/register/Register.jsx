@@ -10,11 +10,13 @@ import StepThree from '../../components/step-three/StepThree'
 import StepFour from '../../components/step-four/StepFour';
 import { useForm, FormProvider } from 'react-hook-form';
 import Alert from '../../components/alert/Alert';
+import { FiChevronDown } from 'react-icons/fi';
 
 const Register = () => {
 
     const navigate = useNavigate()
     const [isChecked, setIsChecked] = useState(false)
+    const [dropDown, setDropDown] = useState(false)
 
     // STEP 1 DETAILS
     const [firstName, setFirstName] = useState('')
@@ -86,6 +88,10 @@ const Register = () => {
         }
     }
 
+    const registerType = ["Register as a volunteer", "Register as an alumni"]
+    const [selectedRegisterType, setSelectedRegisterType] = useState(registerType[0])
+    const [regType, setRegType] = useState(false)
+
     switch (formStep) {
         case 1:
             return (
@@ -132,10 +138,24 @@ const Register = () => {
                     <h1 class="text-xl xl:text-2xl font-[700] text-gray-700">
                         Sign up for an account
                     </h1>
-                    <div className='flex items-center gap-5 text-gray-500 font-[500] mt-6'>
+
+                    {/* <div className='border p-2 rounded-[10px] flex items-center justify-between relative cursor-pointer w-[200px]' onClick={() => setDropDown( dropDown === 'regType' ? false : 'regType')}>
+                        <p className='capitalize text-[13px]'>{selectedRegisterType}</p>
+                        <FiChevronDown className='cursor-pointer' />
+                        {
+                            dropDown ==='regType' &&
+                            <div className='top-11 left-0 border absolute z-50 bg-white rounded-[10px] w-full'>
+                                {registerType.map((item, index) => (
+                                    <div key={index} onClick={() => setSelectedRegisterType(item)} className='capitalize hover:bg-gray-100 text-[13px] p-2 cursor-pointer'>{item}</div>
+                                ))}
+                            </div>
+                        }
+                    </div> */}
+                    {/* <div className='flex items-center gap-5 text-gray-500 font-[500] mt-6'>
                         <button className='text-[#2B91F3] underline text-[12px] sm:text-[16px]'>Register as a Volunteer</button>
                         <button onClick={() => navigate('/register-alumni')} className='text-[12px] sm:text-[16px]'>Register as an Alumni</button>
-                    </div>
+                    </div> */}
+
                     <div className='lg:hidden flex items-center justify-center w-full mt-[2rem]'>
                         <div className='px-2 border bg-[#2B91F3] rounded-full flex items-center text-white'>
                             <p>1</p>

@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { LuUser2 } from "react-icons/lu";
 import { MdDriveEta } from "react-icons/md";
 import { AiFillHome } from 'react-icons/ai';
-import { FiFlag, FiHome, FiMail , FiPhone} from "react-icons/fi";
+import { FiChevronDown, FiFlag, FiHome, FiMail , FiPhone} from "react-icons/fi";
 import { PiCity } from "react-icons/pi";
 import { FaRegAddressBook } from "react-icons/fa";
 import { IoChevronDown } from "react-icons/io5";
@@ -19,16 +19,17 @@ import Alert from '../alert/Alert';
 const StepOne = ({nextStep, userData, setAddress, setCity, setCountry, setLastName, setFirstName, setEmail, setPhone, setDob, setDrivingLicense, setState, setZip}) => {
 
     const navigate = useNavigate()
-    const [countryDropDown, setCountryDropDown] = useState(false)
     const [allCountries, setAllCountries] = useState([])
     const [msg, setMsg] = useState('')
     const [alertType, setAlertType] = useState()
     const [searchText, setSeacrhText] = useState('')
     const [loader, setLoader] = useState(false)
-    const [allSates, setAllStates] = useState([])
-    const [stateDropDown, setStateDropDown] = useState(false)
+    const [allStates, setAllStates] = useState([])
     const [allCities, setAllCities] = useState([])
-    const [cityDropDown, setCityDropDown] = useState(false)
+    // const [countryDropDown, setCountryDropDown] = useState(false)
+    // const [stateDropDown, setStateDropDown] = useState(false)
+    // const [cityDropDown, setCityDropDown] = useState(false)
+    const [dropDown, setDropDown] = useState(false)
 
     const [countryIso, setCountryIso] = useState('')
 
@@ -92,6 +93,9 @@ const StepOne = ({nextStep, userData, setAddress, setCity, setCountry, setLastNa
         }
     }
 
+    const registerType = ["Register as a volunteer", "Register as an alumni"]
+    const [selectedRegisterType, setSelectedRegisterType] = useState(registerType[0])
+
   return (
     <div class="min-h-screen bg-gray-100 text-gray-900 flex justify-center">
         <div
@@ -106,10 +110,31 @@ const StepOne = ({nextStep, userData, setAddress, setCity, setCountry, setLastNa
                         <h1 class="text-xl xl:text-2xl font-[700] text-gray-700">
                             Sign up for an account
                         </h1>
-                        <div className='flex items-center gap-5 text-gray-500 font-[500] mt-6'>
+
+                        <div className='border p-2 rounded-[10px] mt-5 flex items-center justify-between relative cursor-pointer w-[220px]' onClick={() => setDropDown( dropDown === 'regType' ? false : 'regType')}>
+                            <p className='capitalize text-[15px]'>{selectedRegisterType}</p>
+                            <FiChevronDown className='cursor-pointer' />
+                            {
+                                dropDown ==='regType' &&
+                                <div className='top-11 left-0 border absolute z-50 bg-white rounded-[10px] w-full'>
+                                    {registerType.map((item, index) => (
+                                        <div key={index} onClick={() => {
+                                            setSelectedRegisterType(item)
+                                            if(item.includes('alumni')) {
+                                                navigate('/register-alumni')
+                                            }else{
+                                                navigate('/register')
+                                            }
+                                        }} className='capitalize hover:bg-gray-100 text-[13px] p-2 cursor-pointer'>{item}</div>
+                                    ))}
+                                </div>
+                            }
+                        </div>
+                        
+                        {/* <div className='flex items-center gap-5 text-gray-500 font-[500] mt-6'>
                             <button className='text-[#2B91F3] underline text-[12px] sm:text-[16px]'>Register as a Volunteer</button>
                             <button onClick={() => navigate('/register-alumni')} className='text-[12px] sm:text-[16px]'>Register as an Alumni</button>
-                        </div>
+                        </div> */}
                         <div className='lg:hidden flex items-center justify-center w-full mt-[2rem]'>
                             <div className='px-2 border bg-[#2B91F3] rounded-full flex items-center text-white'>
                                 <p>1</p>
@@ -204,9 +229,9 @@ const StepOne = ({nextStep, userData, setAddress, setCity, setCountry, setLastNa
                                                 value={userData.country}
                                             />
                                         </div>
-                                        <IoChevronDown className='text-[24px] text-gray-500 cursor-pointer' onClick={() => setCountryDropDown(!countryDropDown)}/>
+                                        <IoChevronDown className='text-[24px] text-gray-500 cursor-pointer' onClick={() => setDropDown(dropDown === 'country' ? false : "country" )}/>
                                         {
-                                            countryDropDown &&
+                                            dropDown === "country" &&
                                             <div className='bg-white w-full absolute z-[11] top-[45px] rounded-[4px] border border-gray-300 h-[350px] overflow-x-hidden overflow-y-scroll left-0 px-2 py-3'>
                                                 <input type="text" onChange={e => setSeacrhText(e.target.value)} placeholder='Search Country' className='border border-gray-300 w-full placeholder:text-[13px] text-[13px] outline-none px-[4px] rounded mb-1 py-[5px]'/>
                                                 <div>
@@ -219,10 +244,10 @@ const StepOne = ({nextStep, userData, setAddress, setCity, setCountry, setLastNa
                                                         :
                                                         <>
                                                         {
-                                                            allCountries.filter(country => country.name.toLowerCase().includes(searchText.toLowerCase()))
+                                                            allCountries?.filter(country => country.name.toLowerCase().includes(searchText.toLowerCase()))
                                                             .map((country) => (
                                                                 <div className='flex items-center gap-2 hover:bg-gray-300 cursor-pointer p-[5px] text-[14px] text-gray-500'onClick={() => {
-                                                                    setCountryDropDown(!countryDropDown)
+                                                                    setDropDown(false)
                                                                     setCountry(country.name)
                                                                     getStates(country.iso2)
                                                                     setCountryIso(country.iso2)
@@ -248,11 +273,11 @@ const StepOne = ({nextStep, userData, setAddress, setCity, setCountry, setLastNa
                                                 value={userData.state}
                                             />
                                         </div>
-                                        <IoChevronDown className='text-[24px] text-gray-500 cursor-pointer' onClick={() => setStateDropDown(!stateDropDown)}/>
+                                        <IoChevronDown className='text-[24px] text-gray-500 cursor-pointer' onClick={() => setDropDown(dropDown === "state" ? false : "state")}/>
                                         {
-                                            stateDropDown &&
+                                            dropDown === "state" &&
                                             <div className='bg-white w-full absolute z-[12] top-[45px] rounded-[4px] border border-gray-300 h-[350px] overflow-x-hidden overflow-y-scroll left-0 px-2 py-3'>
-                                                <input type="text" onChange={e => setSeacrhText(e.target.value)} placeholder='Search Country' className='border border-gray-300 w-full placeholder:text-[13px] text-[13px] outline-none px-[4px] rounded mb-1 py-[5px]'/>
+                                                <input type="text" onChange={e => setSeacrhText(e.target.value)} placeholder='Search State' className='border border-gray-300 w-full placeholder:text-[13px] text-[13px] outline-none px-[4px] rounded mb-1 py-[5px]'/>
                                                 <div>
                                                 {
                                                         loader ?
@@ -263,10 +288,10 @@ const StepOne = ({nextStep, userData, setAddress, setCity, setCountry, setLastNa
                                                         :
                                                         <>
                                                         {
-                                                            allSates.filter(state => state.name.toLowerCase().includes(searchText.toLowerCase()))
+                                                            allStates?.filter(state => state.name.toLowerCase().includes(searchText.toLowerCase()))
                                                             .map((state) => (
                                                                 <div className='flex items-center gap-2 hover:bg-gray-300 cursor-pointer p-[5px] text-[14px] text-gray-500'onClick={() => {
-                                                                    setStateDropDown(!stateDropDown)
+                                                                    setDropDown(false)
                                                                     setState(state.name)
                                                                     getCities(state.iso2)
                                                                 }}>
@@ -302,11 +327,11 @@ const StepOne = ({nextStep, userData, setAddress, setCity, setCountry, setLastNa
                                                 value={userData.city}
                                             />
                                         </div>
-                                        <IoChevronDown className='text-[24px] text-gray-500 cursor-pointer' onClick={() => setCityDropDown(!cityDropDown)}/>
+                                        <IoChevronDown className='text-[24px] text-gray-500 cursor-pointer' onClick={() => setDropDown(dropDown === "city" ? false : "city")}/>
                                         {
-                                            cityDropDown &&
+                                            dropDown === "city" &&
                                             <div className='bg-white w-full absolute top-[45px] rounded-[4px] border border-gray-300 h-[350px] overflow-x-hidden overflow-y-scroll left-0 px-2 py-3'>
-                                                <input type="text" onChange={e => setSeacrhText(e.target.value)} placeholder='Search Country' className='border border-gray-300 w-full placeholder:text-[13px] text-[13px] outline-none px-[4px] rounded mb-1 py-[5px]'/>
+                                                <input type="text" onChange={e => setSeacrhText(e.target.value)} placeholder='Search City' className='border border-gray-300 w-full placeholder:text-[13px] text-[13px] outline-none px-[4px] rounded mb-1 py-[5px]'/>
                                                 <div>
                                                 {
                                                         loader ?
@@ -317,10 +342,10 @@ const StepOne = ({nextStep, userData, setAddress, setCity, setCountry, setLastNa
                                                         :
                                                         <>
                                                         {
-                                                            allCities.filter(city => city.name.toLowerCase().includes(searchText.toLowerCase()))
+                                                            allCities?.filter(city => city.name.toLowerCase().includes(searchText.toLowerCase()))
                                                             .map((city) => (
                                                                 <div className='flex items-center gap-2 hover:bg-gray-300 cursor-pointer p-[5px] text-[14px] text-gray-500'onClick={() => {
-                                                                    setCityDropDown(!cityDropDown)
+                                                                    setDropDown(false)
                                                                     setCity(city.name)
                                                                 }}>
                                                                     <p>{city.name}</p>
