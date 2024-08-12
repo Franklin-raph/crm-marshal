@@ -54,3 +54,19 @@
     }
 
   }
+
+  .videobtn-anim{
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    display: inline-block;
+    text-align: center;
+    border-radius: 100%;
+    color: #fff;
+    -webkit-animation: 1s linear infinite ripple-white;
+    animation: 1s linear infinite ripple-blue;
+    -webkit-transition: .5s;
+    background: #ce014e;
+    font-size: 16px;
+    z-index: 1;
+  }

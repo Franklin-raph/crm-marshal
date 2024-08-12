@@ -12,7 +12,10 @@ const Home = () => {
                 <img src="./images/brand-header.png" className='w-[35px]' alt="" />
                 <p className='font-[600] text-gray-500'>INFOTECH IMPACT</p>
             </Link>
-            <Link to='/support' className='text-gray-500'>Support</Link>
+            <div className='flex items-center gap-6'>
+                <Link to='/support' className='text-gray-500'>Support</Link>
+                <Link to='/it-training' className='text-gray-500'>IT-Training</Link>
+            </div>
         </nav>
         <div className='mt-[5rem] flex items-center flex-col md:flex-row justify-between'>
             <div className='px-[2rem] lg:px-[5rem] w-full md:text-left text-center lg:w-[60%]'>
