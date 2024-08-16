@@ -97,23 +97,23 @@ const ItTraining = () => {
                     >
                         <div className="absolute inset-0 bg-black opacity-50"></div>
                         <div className="relative z-10 flex flex-col items-center justify-center h-full text-center">
-                        <h2 className="text-lg md:text-xl tracking-[10px]">WELCOME TO INFOTECH IMPACT</h2>
-                        <h1 className="text-4xl md:text-6xl font-bold mt-4 w-[60%]">Empowerment Through Technology</h1>
-                        <Link to="https://youtu.be/Qtq-27bNTrs" target='_blank' className='bg-gray-100 p-[10px] rounded-full mt-3 cursor-pointer'>
-                            <PiYoutubeLogoLight className='text-red-600 fill-current transition-transform duration-300 group-hover:scale-110 animate-pulse text-[36px]'/>
-                        </Link>
-                        <div className="flex items-center mt-6">
-                            <input
-                            type="text"
-                            placeholder="Search.."
-                            className="py-3 px-4 rounded-l-full text-black w-full md:w-96 focus:outline-none"
-                            />
-                            <button className="bg-[#2B91F3] text-white py-[14px] px-6 rounded-r-full focus:outline-none">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2.5" stroke="currentColor" className="w-5 h-5">
-                                <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-4.35-4.35m0 0a7.5 7.5 0 10-10.6 0 7.5 7.5 0 0010.6 0z" />
-                            </svg>
-                            </button>
-                        </div>
+                            <h2 className="text-lg md:text-xl tracking-[10px]">WELCOME TO INFOTECH IMPACT...</h2>
+                            <h1 className="text-4xl md:text-6xl font-bold mt-4 w-[60%]">Empowerment Through Technology</h1>
+                            <Link to="https://youtu.be/Qtq-27bNTrs" target='_blank' className='bg-gray-100 p-[10px] rounded-full mt-3 cursor-pointer'>
+                                <PiYoutubeLogoLight className='text-red-600 fill-current transition-transform duration-300 group-hover:scale-110 animate-pulse text-[36px]'/>
+                            </Link>
+                            <div className="flex items-center mt-6 px-[9rem]">
+                                <input
+                                    type="text"
+                                    placeholder="Search.."
+                                    className="py-3 px-4 rounded-l-full text-black max-w-[20rem] sm:w-96 focus:outline-none"
+                                />
+                                <button className="bg-[#2B91F3] text-white py-[14px] px-6 rounded-r-full focus:outline-none">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2.5" stroke="currentColor" className="w-5 h-5">
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-4.35-4.35m0 0a7.5 7.5 0 10-10.6 0 7.5 7.5 0 0010.6 0z" />
+                                </svg>
+                                </button>
+                            </div>
                         </div>
                     </div>
                     </SwiperSlide>
@@ -150,8 +150,8 @@ const ItTraining = () => {
         <section className='mt-[7rem]'>
             <p className='text-[30px] font-[600] text-center mt-10 mb-3 text-gray-700'>Our Popular Courses</p>
             <div>
-                <div className='grid grid-cols-4 p-5 gap-5'>
-                    <Link to='#' className="relative group text-center p-4 rounded-[14px] shadow-lg flex flex-col items-center overflow-hidden">
+                <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 p-5 gap-5'>
+                    <Link to='#' className="relative group text-center p-4 rounded-[14px] shadow-lg flex flex-col items-center overflow-hidden border">
                         {/* <CiGlobe className='text-[40px] text-center'/> */}
                         <img src="./images/coding-language.png" alt="" className='w-[100px] h-[100px]' />
                         <h3 className='text-[22px] font-[500] my-7 text-gray-500'>Programming</h3>
@@ -167,7 +167,7 @@ const ItTraining = () => {
                             </button>
                         </div>
                     </Link>
-                    <Link to='#' className="relative group text-center p-4 rounded-[14px] shadow-lg flex flex-col items-center overflow-hidden">
+                    <Link to='#' className="relative group text-center p-4 rounded-[14px] shadow-lg flex flex-col items-center overflow-hidden border">
                         {/* <CiGlobe className='text-[40px] text-center'/> */}
                         <img src="./images/server.png" alt="" className='w-[100px] h-[100px]' />
                         <h3 className='text-[22px] font-[500] my-7 text-gray-500'>Cloud Technology</h3>
@@ -183,7 +183,7 @@ const ItTraining = () => {
                             </button>
                         </div>
                     </Link>
-                    <Link to='#' className="relative group text-center p-4 rounded-[14px] shadow-lg flex flex-col items-center overflow-hidden">
+                    <Link to='#' className="relative group text-center p-4 rounded-[14px] shadow-lg flex flex-col items-center overflow-hidden border">
                         {/* <CiGlobe className='text-[40px] text-center'/> */}
                         <img src="./images/ui-design.png" alt="" className='w-[100px] h-[100px]' />
                         <h3 className='text-[22px] font-[500] my-7 text-gray-500'>UI/UX Design</h3>
@@ -200,7 +200,7 @@ const ItTraining = () => {
                     </Link>
                     <Link
                         to="#"
-                        className="relative group text-center p-4 rounded-[14px] shadow-lg flex flex-col items-center overflow-hidden"
+                        className="relative group text-center p-4 rounded-[14px] shadow-lg flex flex-col items-center overflow-hidden border"
                     >
                         <img src="./images/meeting.png" alt="" className="w-[100px] h-[100px]" />
                         <h3 className="text-[22px] font-[500] my-7 text-gray-500">Business Analytics</h3>
