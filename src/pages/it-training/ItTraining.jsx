@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { BiChevronDown } from 'react-icons/bi'
+import { BiChevronDown, BiMenu } from 'react-icons/bi'
 import { Link } from 'react-router-dom'
 
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -19,15 +19,16 @@ import { FaFacebookF, FaTwitter, FaInstagram, FaLinkedinIn, FaYoutube } from 're
 const ItTraining = () => {
 
   const [dropDown, setDropDown] = useState(false)
+  const [toggleNav, setToogleNav] = useState(false)
 
   return (
     <div>
         <nav className='flex items-center justify-between px-[1.5rem] md:px-[5rem] py-4 shadow-sm'>
             <Link to='/' className='flex items-center gap-3'>
-                <img src="./images/brand-header.png" className='w-[35px]' alt="" />
-                <p className='font-[600] text-gray-500'>INFOTECH IMPACT</p>
+                <img src="./images/brand-header.png" className='md:w-[35px] w-[25px]' alt="" />
+                <p className='font-[600] text-gray-500 md:text-[16px] text-[12px]'>INFOTECH IMPACT</p>
             </Link>
-            <div className='flex items-center gap-[42px] relative'>
+            <div className='lg:flex hidden items-center lg:gap-[42px] relative'>
                 <Link to='/support' className='text-gray-500'>Home</Link>
                 <Link to='/support' className='text-gray-500'>About Us</Link>
                 <Link to='/support' className='text-gray-500'>Courses</Link>
@@ -46,7 +47,29 @@ const ItTraining = () => {
                     </div>
                 }
             </div>
-            <button className='bg-[#2B91F3] py-2 px-5 rounded-[6px] text-white'>Donate</button>
+            <div className={ toggleNav === true ? `flex flex-col items-center px-2 fixed bg-white top-[20%] sm:w-[400px] w-[85%] py-[20px] left-[50%] translate-x-[-50%] translate-y-[-10%] z-[111] transition-[10s]` : `flex flex-col lg:hidden items-center px-2 fixed bg-white top-[-40%] sm:w-[400px] w-[85%] py-[20px] left-[50%] translate-x-[-50%] translate-y-[-10%] z-[111] transition-[10s]`}>
+                <Link to='/support' className='text-gray-500 w-full px-3 py-[10px] hover:bg-gray-100'>Home</Link>
+                <Link to='/support' className='text-gray-500 w-full px-3 py-[10px] hover:bg-gray-100'>Courses</Link>
+                <Link to='/support' className='text-gray-500 w-full px-3 py-[10px] hover:bg-gray-100'>About Us</Link>
+                <Link to='/support' className='text-gray-500 w-full px-3 py-[10px] hover:bg-gray-100'>Contact Us</Link>
+                <div className='flex items-center gap-2 w-full justify-between cursor-pointer px-3 py-[10px] hover:bg-gray-100' onClick={() => setDropDown(dropDown === "training" ? false : 'training')}>
+                    <Link to='/it-training' className='text-gray-500'>IT-Training</Link>
+                    <BiChevronDown className='text-[26px] text-gray-500 cursor-pointer' onClick={() => setDropDown('training')}/>
+                </div>
+                {
+                    dropDown === 'training' &&
+                    <div className='flex items-start flex-col bg-white w-full p-1'>
+                        <Link to='#' className='text-gray-500 hover:bg-gray-100 py-2 px-4 w-full'>Alumni</Link>
+                        <Link to='#' className='text-gray-500 hover:bg-gray-100 py-2 px-4 w-full'>Volunteer</Link>
+                        <Link to='#' className='text-gray-500 hover:bg-gray-100 py-2 px-4 w-full'>Youth Empowerment</Link>
+                        <Link to='#' className='text-gray-500 hover:bg-gray-100 py-2 px-4 w-full'>New To Information Technology</Link>
+                    </div>
+                }
+            </div>
+            <div className='flex items-center gap-4 flex-row-reverse'>
+                <BiMenu className='text-[25px] cursor-pointer block lg:hidden' onClick={() => setToogleNav(toggleNav === true ? false : true )}/>
+                <button className='bg-[#2B91F3] py-2 px-5 rounded-[6px] text-white'>Donate</button>
+            </div>
         </nav>
         <main>
             <div className="relative bg-black text-white h-screen">
@@ -97,7 +120,7 @@ const ItTraining = () => {
                     >
                         <div className="absolute inset-0 bg-black opacity-50"></div>
                         <div className="relative z-10 flex flex-col items-center justify-center h-full text-center">
-                            <h2 className="text-lg md:text-xl tracking-[10px]">WELCOME TO INFOTECH IMPACT...</h2>
+                            <h2 className="text-lg md:text-xl tracking-[10px]">WELCOME TO INFOTECH IMPACT</h2>
                             <h1 className="text-4xl md:text-6xl font-bold mt-4 w-[60%]">Empowerment Through Technology</h1>
                             <Link to="https://youtu.be/Qtq-27bNTrs" target='_blank' className='bg-gray-100 p-[10px] rounded-full mt-3 cursor-pointer'>
                                 <PiYoutubeLogoLight className='text-red-600 fill-current transition-transform duration-300 group-hover:scale-110 animate-pulse text-[36px]'/>
